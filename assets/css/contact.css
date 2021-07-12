@@ -1,0 +1,132 @@
+/* 
+=======
+GENERAL
+=======
+*/
+
+input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+}
+
+input:focus {
+    outline: none;
+}
+
+
+
+/* 
+=================
+CONTACT CONTAINER
+=================
+*/
+
+.center-container > *:nth-child(2) {
+    flex: 1 1 100%;
+}
+
+.center-title__container {
+    margin-left: 0;
+}
+
+.contact-container {
+    width: 70%;
+    margin: 0 auto;
+    position: relative;
+    padding: 5rem 4rem 3.5rem 5em;
+    background-color: rgba(89, 89, 89, .2);
+    backdrop-filter: blur(8px);
+}
+
+.contact-title {
+    position: absolute;
+    margin-left: 0;
+    font-size: 2.5rem;
+    top: -1.6rem;
+}
+
+/* .contact-text {
+
+} */
+
+.contact-text-small {
+    max-width: 23ch;
+}
+
+.contact-bg {
+    position: fixed;
+    inset: 0;
+    background-color: red;
+    z-index: -2;
+    background-image: url("../imgs/contact-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 100%;
+}
+
+.social-icon + .social-icon {
+    margin-left: 1.2rem;
+}
+
+/* 
+====
+FORM
+====
+*/
+
+.contact-form {
+    justify-content: space-between;
+    margin-left: 0;
+}
+
+.contact-form > * + * {
+    margin-top: 1rem;
+}
+
+.contact-input__cont {
+    position: relative;
+    width: 100%;
+}
+
+.contact-input__cont + .contact-input__cont {
+    margin-top: 1rem;
+}
+
+.contact-input {
+    width: 100%;
+}
+
+.contact-label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    transition: top .7s cubic-bezier(0.13, 0.77, 0.33, 1);
+}
+
+.contact-label.goTop {
+    top: -30px;
+    left: -4%;
+    transform: scale(.8);
+}
+
+.contact-btn__container {
+    width: 100%;
+    display: flex;
+    margin-top: 3rem;
+}
+
+.contact-btn__container button {
+    background-color: rgba(119, 119, 119, .2);
+    backdrop-filter: blur(3px);
+    color: white;
+    padding: .5rem 3rem;
+    border: none;
+    margin-left: auto;
+}
+
+.contact-socialicon__container {
+    margin-top: 3rem;
+}
