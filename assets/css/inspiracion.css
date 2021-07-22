@@ -1,0 +1,71 @@
+body {
+    background: white;
+}
+
+.inspiracion-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.inspiracion-mainText__container {
+    width: 47ch;
+    max-width: 30%;
+    margin: 0 auto;
+    transition: 6s cubic-bezier(0.13, 0.77, 0.33, 1);
+    
+}
+
+.inspiracion-mainText__container.fade-out {
+    transform: translateY(-100vh);
+    }
+
+.inspiracion-bg {
+    width: 100%;
+    position: absolute;
+    background-image: url("../imgs/inspiracion.png");
+    min-height: inherit;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 100%;
+    z-index: -1;
+}
+
+.inspiracion-bg-mask {
+    position: absolute;
+    width: 100%;
+    min-height: inherit;
+    background-color: black;
+    opacity: .8;
+    transition: 6s cubic-bezier(0.13, 0.77, 0.33, 1);
+    z-index: -1;
+}
+
+.inspiracion-bg-mask.fade-out {
+    opacity: 0;
+}
+
+.logo-container {
+    opacity: 0;
+    transition: opacity 2s cubic-bezier(0.13, 0.77, 0.33, 1);
+}
+
+.logo-container.fade-in {
+    opacity: 1;
+}
+
+.bottom-lines__left.fade-in,
+.bottom-lines__right.fade-in {
+    transform: translateX(0%);
+    transition: transform 3s cubic-bezier(0.13, 0.77, 0.33, 1);
+}
+
+.top-lines__left.fade-in,
+.top-lines__right.fade-in {
+    transition: transform 3s cubic-bezier(0.13, 0.77, 0.33, 1);
+    transform: translateX(0%);
+}
+

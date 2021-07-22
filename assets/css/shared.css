@@ -1,0 +1,299 @@
+@font-face{
+    font-family: 'Jost';
+    src: url(/assets/Jost/Jost-VariableFont_wght.ttf)
+}
+
+:root {
+    --clr-primary-100: #FDB90D;
+    --clr-primary-300: #FFF;
+    --clr-primary-500: #000;
+
+    --ff-primary: sans-serif;
+    --ff-accent: "Jost", sans-serif;
+}
+
+*, 
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--ff-primary);
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+body,
+h1,
+h2
+h3,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--ff-accent);
+    font-weight: 900;
+    line-height: 1;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-bottom: 1em;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+section {
+    padding: 3rem 0;
+}
+
+@media (min-width: 40em) {
+    section {
+        padding: 7rem 0;
+    }
+}
+
+.container {
+    margin: 0 auto;
+    width: min(90%, 87rem);
+    /* en pantallas chicas se va a quedar en 90% y en grandes va a llegar hasta 70.5rem de ancho */
+}
+
+.split {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 40em) {
+    .split {
+        flex-direction: row;
+    }
+
+    .split > * {
+        flex-basis: 100%;
+    }
+
+    .split > * + * {
+        margin-left: 2em;
+    }
+
+    .flex {
+        display: flex;
+    }
+    
+    .col {
+        flex-direction: column;
+    }
+}
+
+.container--narrow {
+    max-width: 34rem;
+}
+
+.bg-dark {
+    background-color: rgba(0,0,0,.8);
+}
+
+
+
+/* 
+======
+HEADER
+======
+*/
+
+.top-lines__cont {
+    width: 100%;
+    display: flex;
+    height: 8vh;
+}
+
+.top-lines__cont > * {
+    flex-basis: 100%;
+}
+
+.top-lines__left {
+    border-bottom: 1px solid white;
+}
+
+.top-lines__right {
+    border-bottom: 1px solid white;
+}
+
+.top-text__center {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    /* margin-bottom: -5%; */
+    position: relative;
+}
+
+.logo-container {
+    position: absolute;
+    bottom: -.8125rem;
+    display: flex;
+    align-items: baseline;
+    width: max-content;
+}
+
+.logo { 
+    border: .3rem solid #FDB90D;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 1rem;
+    margin: auto 0;
+    margin-right: 1rem;
+}
+
+.logo-text {
+    margin-bottom: 0;
+}
+
+
+/* 
+==============
+MAIN CONTAINER
+==============
+*/
+
+.main-container {
+    width: 100vw;
+    min-height: 100vh;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.main-container::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    inset: 0;
+    background-color: rgba(0, 0, 0, .7);
+    backdrop-filter: blur(2px);
+    z-index: -1;
+}
+
+.center-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.center-container > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 40em) {
+    .center-container > *:nth-child(1) {
+        flex: 1 1 16.6666667%
+    }
+
+    .center-container > *:nth-child(2) {
+        flex: 1 1 66.6666667%
+    }
+
+    .center-container > *:nth-child(3) {
+        flex: 1 1 16.6666667%
+    }
+}
+
+
+.nav-list > * + * {
+    margin-top: 3rem;
+}
+
+.social-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.social-icon + .social-icon {
+    margin-top: 3rem;
+}
+
+
+
+/* 
+======
+FOOTER
+======
+*/
+
+.bottom-lines__cont {
+    width: 100%;
+    height: 4rem;
+    border-top: 1px solid white;
+}
+
+/* 
+=====
+ANIMS
+=====
+*/
+
+.fade-in {
+    opacity: 0;
+    transition: .7s cubic-bezier(0.13, 0.77, 0.33, 1);
+}
+
+.fade-in.appear {
+    opacity: 1;
+}
+
+.from-left {
+    transform: translateX(-5%)
+}
+
+.from-right {
+    transform: translateX(5%)
+}
+
+.from-left, .from-right, .from-bottom, .from-top {
+    transition: opacity .8s cubic-bezier(0.13, 0.77, 0.33, 1), transform .7s cubic-bezier(0.13, 0.77, 0.33, 1);
+    opacity: 0;
+}
+
+.from-left.appear, .from-right.appear {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.from-top {
+    transform: translateY(-7%);
+}
+
+.from-bottom {
+    transform: translateY(7%);
+}
+
+.from-bottom.appear, .from-top.appear {
+    transform: translateY(0);
+    opacity: 1;
+}

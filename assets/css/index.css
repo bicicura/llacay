@@ -1,0 +1,72 @@
+/* 
+========
+CAROUSEL
+========
+*/
+
+.carousel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -2;
+}
+
+.item {
+    min-height: 100vh;
+    position: relative;
+}
+
+.bc1, .bc2 {
+    min-height: inherit;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 100%;
+}
+
+.bc1 {
+    background-image: url("../imgs/roof-top.png");
+}
+
+.bc2 {
+    background-image: url("../imgs/garden.png");
+}
+
+
+
+/* 
+================
+CENTER CONTAINER
+================
+*/
+
+h1 {
+    font-size: 4rem;
+    margin-bottom: 0;
+    font-family: var(--ff-accent-alternative);
+    letter-spacing: .125rem;
+}
+
+.title-span {
+    font-size: 2rem;
+    font-family: var(--ff-primary);
+    font-weight: 300;
+}
+
+.index-main-container {
+    display: flex;
+    align-content: center;
+}
+
+.index-main-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.index-center-title__container {
+    margin: auto 0;
+}

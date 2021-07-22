@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        .fotos-titulo {
+            color: blue;
+        }
+
+        .reco-titulo {
+            color: red;
+        }
+
+        .fade-in {
+    opacity: 0;
+    transition: .7s cubic-bezier(0.13, 0.77, 0.33, 1);
+}
+
+.fade-in.appear {
+    opacity: 1;
+}
+
+.from-left {
+    transform: translateX(-5%)
+}
+
+.from-right {
+    transform: translateX(5%)
+}
+
+.from-left, .from-right, .from-bottom, .from-top {
+    transition: opacity .8s cubic-bezier(0.13, 0.77, 0.33, 1), transform .7s cubic-bezier(0.13, 0.77, 0.33, 1);
+    opacity: 0;
+}
+
+.from-left.appear, .from-right.appear {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.from-top {
+    transform: translateY(-7%);
+}
+
+.from-bottom {
+    transform: translateY(7%);
+}
+
+.from-bottom.appear, .from-top.appear {
+    transform: translateY(0);
+    opacity: 1;
+}
+    </style>
+</head>
+<body>
+
+    <button id="soyFotos">Fotos dinamica</button>
+
+    <button id="soyRecos">Recos dinamica</button>
+
+    <div id="movidaDinamica">
+
+    </div>
+
+</body>
+
+<script>
+
+    // ANIM
+
+    function appearFunc() {
+        const faders = document.querySelectorAll('.fade-in');
+        const sliders = document.querySelectorAll('.slide-in');
+const appearOptions = {
+    threshold: 0,
+    rootMargin: "0px 0px 0px 0px"
+}
+
+
+const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+entries.forEach(entry => {
+    if (!entry.isIntersecting) {
+        entry.target.classList.remove('appear');
+     return
+    } else {
+       entry.target.classList.add('appear');
+    //    appearOnScroll.unobserve(entry.target);
+    }
+})
+}, appearOptions);
+
+faders.forEach(fader => {
+appearOnScroll.observe(fader);
+})
+
+sliders.forEach(slider => {
+appearOnScroll.observe(slider)
+})
+    }
+
+    // HTML DINAMICO
+
+    let soyFotos = document.getElementById("soyFotos")
+    let soyRecos = document.getElementById("soyRecos")
+    let movidaDinamica = document.getElementById("movidaDinamica")
+
+    soyFotos.addEventListener('click', (ev) => {
+        movidaDinamica.innerHTML = vista_fotos("Probando fotos!")
+        appearFunc()
+    } )
+
+    soyRecos.addEventListener('click', (ev) => {
+        movidaDinamica.innerHTML = vista_recomendaciones("Probando Recos!")
+        appearFunc()
+    } )
+
+    function vista_fotos (titulo){
+        return `<div id="vista-fotos" class="fade-in from-bottom">
+        <h1 class="fotos-titulo">${titulo}</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, laboriosam at aspernatur similique facere ex temporibus architecto asperiores suscipit nihil?</p>
+    </div>`
+    }
+
+    function vista_recomendaciones(titulo2) {
+        return `<div class="fade-in from-bottom">
+        <h1 class="reco-titulo">${titulo2}</h1>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea at exercitationem vero saepe dignissimos recusandae, rerum voluptatibus voluptates reprehenderit sed.</p>
+    </div>`
+    }
+
+</script>
+</html>

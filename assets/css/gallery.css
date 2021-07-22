@@ -1,0 +1,52 @@
+.logo-container {
+    display: none;
+}
+
+.main-container::before {
+    background-color: rgba(0, 0, 0, 1);
+    backdrop-filter: none;
+}
+
+.gallery-section {
+    width: 60%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+}
+
+.gallery-cols__container {
+    display: flex;
+    width: 100%;
+}
+
+@media (min-width: 40em) {
+    .gallery-cols__container > *:nth-child(1) {
+        flex: 1 1 21.6666667%
+    }
+
+    .gallery-cols__container > *:nth-child(2) {
+        flex: 1 1 56.6666667%;
+        margin: 0 1rem; 
+    }
+
+    .gallery-cols__container > *:nth-child(3) {
+        flex: 1 1 21.6666667%
+    }
+}
+
+.gallery-img__container {
+    width: 100%;
+    min-height: 12.5rem;
+}
+
+img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+
+.gallery-img__container + .gallery-img__container, .gallery-img--mid__container + .gallery-img--mid__container {
+    margin-top: 1rem;
+}

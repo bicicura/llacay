@@ -1,0 +1,150 @@
+/* 
+=======
+GENERAL
+=======
+*/
+
+input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+}
+
+input:focus {
+    outline: none;
+}
+
+.center-social-container {
+    display: none;
+}
+
+/* 
+=================
+CONTACT CONTAINER
+=================
+*/
+
+.contact-main-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-container {
+    width: 60%;
+    max-width: 1080px;
+    position: relative;
+    padding: 5rem 4rem 3.5rem 5em;
+    background-color: rgba(89, 89, 89, .2);
+    backdrop-filter: blur(8px);
+    transform: translateX(10%);
+}
+
+.contact-title {
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    margin-left: 0;
+    font-size: 2.5rem;
+    top: -1.6rem;
+}
+
+.contact-text {
+    width: 50%;
+}
+
+.contact-text-small {
+    max-width: 23ch;
+}
+
+.contact-bg {
+    position: fixed;
+    inset: 0;
+    background-color: red;
+    z-index: -2;
+    background-image: url("../imgs/contact-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 100%;
+}
+
+.social-icon + .social-icon {
+    margin-left: 1.2rem;
+}
+
+/* 
+====
+FORM
+====
+*/
+
+.contact-form {
+    justify-content: space-between;
+    margin-left: 0;
+    width: 100%;
+}
+
+.contact-input__cont {
+    width: 100%;
+}
+
+.contact-input {
+    width: 100%;
+}
+
+
+.contact-btn__container {
+    width: 100%;
+    display: flex;
+    margin-top: 3rem;
+}
+
+.contact-btn__container button {
+    background-color: rgba(119, 119, 119, .2);
+    backdrop-filter: blur(3px);
+    color: white;
+    padding: .5rem 3rem;
+    border: none;
+    margin-left: auto;
+}
+
+.contact-socialicon__container {
+    margin-top: 3rem;
+}
+
+
+
+/* 
+===========
+INPUTS FRAN
+===========
+*/
+
+.inputes {
+	outline: none;
+	font-family: 'Montserrat';
+	position: relative;
+	background: none;
+	border: none;
+	padding: 5px;
+	border-image-slice: 10;
+	border-bottom: 2px solid #b5b5b5;
+	font-size: 0.9em;
+	outline: none; 
+    color: white;
+    padding-left: .6rem;
+}
+
+.tags {
+	font-weight: 500;
+	color: white;
+	font-size: 0.7em;
+	transition: .25s;
+	transform: translate(20% , 160%) scale(1.4);
+	display: inline-block;
+    padding-left: .6rem;
+}
+
+.inputes:focus {
+	border-bottom: 2px solid white;
+}

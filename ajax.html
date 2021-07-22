@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button id="btn">Cargar archivo externo</button>
+
+    <script>
+        const peticion = new XMLHttpRequest() // Instancio el objeto
+        //eventos
+        peticion.addEventListener("readystatechange", e => {
+            // console.log('Hubo un cambio en el estado de la peticion')
+            console.log(peticion.readyState)
+
+            if (peticion.readyState == 2){
+                peticion.abort()
+
+            }            
+        })
+
+        document.querySelector('#btn').addEventListener('click', ev => {
+
+        peticion.addEventListener('load', ev => { //equivalente a readystate 4
+            if (peticion.status == 200) {
+                const p = document.createElement('p')
+                p.innerText = peticion.response
+                console.log(p)
+                document.body.appendChild(p) //aparece en el final del body
+                console.log('La peticion fue un exito')
+                }else{
+                    console.log('La peticion devuelve error')
+                }
+            })
+
+        console.log(peticion)    
+
+        peticion.addEventListener('abort', ev => {
+            console.log('Hemos abortado el procesamiento de la peticion')
+        })
+
+
+        //Configuracion del objeto
+        peticion.open('GET', 'texto.txt')
+
+        //Envio del objeto
+        peticion.send()
+            
+        })
+    </script>
+</body>
+</html>
