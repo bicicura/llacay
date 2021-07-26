@@ -18,17 +18,9 @@ const ajax = (metodo, url, elemento) => {
 
     xhr.open(metodo, url)
 
-    //     xhr.onload = function(e) {
-    //     setTimeout(function() {
-    //         const gmail = $('.gmail')
-    //     gmail.css({'transition':'transform 1s linear' ,'transform':'translateX(20%)'});
-    //     }, 100)
-    // } 20/07
-
     xhr.send()
 
 }
-
 
 // ============================================================
 // Si el window no tiene una ruta, redirije a la home con ajax()
@@ -233,6 +225,7 @@ function inspiracionBgTransition() {
 }
 
 function inspiracionBgTransitionReset() {
+    bgMaskTransition.classList.remove('fade-out-scroll')
     bgMaskTransition.classList.remove('fade-in')
     inspiracionBg.classList.remove('fade-in')
     bgMaskTransition.classList.add('fade-out')
@@ -331,7 +324,6 @@ function recosBgTransitionReset() {
     recosBg.classList.add('fade-out')
 }
 
-
 // ======================================================================================
 // inspiracionAnims() hace las transiciones una vez navegando la seccion de inspiraciones
 // ======================================================================================
@@ -343,7 +335,7 @@ function inspiracionAnimScroll() {
         const inspiracionMainText = document.querySelector('.inspiracion-mainText__container')
         console.log('escroleaste!')
         inspiracionMainText.classList.add('fade-out')
-        bgMaskTransition.classList.add('fade-out')
+        bgMaskTransition.classList.add('fade-out-scroll')        
     })
 }
 
@@ -352,21 +344,35 @@ function inspiracionAnimScroll() {
 // Transición de cualquier vista a GALERIA 
 // =======================================
 
+function galeriaTransitionReset() {
+    recosBg.classList.remove('fade-in')
+    recosBg.classList.add('fade-out')
+    inspiracionBg.classList.remove('fade-in')
+    inspiracionBg.classList.add('fade-out')
+    contactoBg.classList.remove('fade-in')
+    contactoBg.classList.add('fade-out')
+}
+
 const galeriaBtn = document.querySelector('#gallery-spa')
 const galeriaTransitionDiv = document.querySelector('.galeria-transition')
 
-function galeriaTransition() {
+function galeriaDivFade() {
     galeriaTransitionDiv.classList.remove('fade-out')
     galeriaTransitionDiv.classList.add('fade-in')
+}
+
+function galeriaTransition() {
+    galeriaDivFade()
+
     setTimeout(() => {
         galeriaTransitionDiv.classList.remove('fade-in')
         galeriaTransitionDiv.classList.add('fade-out')}, 1200); 
 }
 
-galeriaBtn.addEventListener('click', () => {
-    galeriaTransition()
-})
-
+function galeriaBgTransitionReset() {
+    bgMaskTransition.classList.remove('fade-in')
+    bgMaskTransition.classList.add('fade-out')
+}
 
 // ===================================================================
 // Para que carguen los JS de animaciones cuando se actualiza la vista
@@ -374,10 +380,9 @@ galeriaBtn.addEventListener('click', () => {
 
 function checkGaleria() {
     if (window.location.pathname.includes("galeria")) {
+        galeriaTransition()
+        galeriaTransitionReset()
         removeDisappear()
-        contactoBgTransitionReset()
-        recosBgTransitionReset()
-        inspiracionBgTransitionReset()
         setTimeout(() => {
             rowAppear()
             }, 1000);

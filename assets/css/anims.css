@@ -153,3 +153,8 @@ INSPIRACION
 .recos-transition.fade-out {
     transition-delay: 1.2s;
 }
+
+.bg-mask-transition.fade-out-scroll {
+    opacity: 0;
+    transition: opacity 1.3s cubic-bezier(0.49, 0.01, 0.32, 0.99);
+}
