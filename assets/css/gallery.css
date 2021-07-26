@@ -1,25 +1,10 @@
+.logo-container {
+    display: none;
+}
+
 .main-container::before {
-    content: "";
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    inset: 0;
     background-color: rgba(0, 0, 0, 1);
     backdrop-filter: none;
-    z-index: -1;
-}
-
-.top-lines__cont {
-    position: fixed;
-    top: 5vh;
-    left: 0;
-    z-index: 100;
-}
-
-.bottom-lines__cont {
-    position: fixed;
-    bottom: 5vh;
-    left: 0;
 }
 
 .gallery-section {
@@ -43,7 +28,7 @@
 
     .gallery-cols__container > *:nth-child(2) {
         flex: 1 1 56.6666667%;
-        margin: 0 1rem; 
+        margin: 0 1rem;
     }
 
     .gallery-cols__container > *:nth-child(3) {
@@ -64,4 +49,102 @@ img {
 
 .gallery-img__container + .gallery-img__container, .gallery-img--mid__container + .gallery-img--mid__container {
     margin-top: 1rem;
+}
+
+.nav-mob {
+    display: none;
+}
+
+@media (max-width: 799px) {
+
+    .top-lines__left, .top-lines__right
+
+    .logo-container {
+        display: block;
+    }
+
+    body {
+        overflow-y: hidden;
+        overflow-x: auto;
+    }
+
+    .nav-mob {
+        display: flex;
+    }
+
+    .logo-container {
+        display: flex;
+    }
+    
+    .split {
+        flex-direction: column;
+    }
+
+    .gallery-section {
+        width: max-content;
+        height: 38rem;
+        /* border: 2px solid salmon; */
+        margin-top: 3.5rem;
+        /* height: 87vh; ANTES ESTABA ASI */
+    }
+
+    .gallery-cols__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .gallery-img__container, .gallery-col___left, .gallery-col___right, .gallery-col___mid {
+        display: flex;
+        min-height: auto;
+    }
+
+    .gallery-img__container + .gallery-img__container, .gallery-img--mid__container + .gallery-img--mid__container {
+        margin-top: 0;
+    }
+
+    .gallery-col___mid {
+        margin: 1rem 0;
+        display: flex;
+        justify-content: space-between!important;
+    }
+
+    .gallery-cols__container > *:nth-child(1) {
+        max-height: 7rem;
+        width: 500px;
+
+    }
+
+    .gallery-cols__container > *:nth-child(2) {
+        min-height: 17rem;
+        max-height: 17rem;
+        width: 600px;
+    }
+
+    .gallery-cols__container > *:nth-child(3) {
+        max-height: 7rem;
+        width: 500px;
+    }
+
+    .gallery-img--mid__container img {
+        min-height: 100%;
+    }
+
+    /* .mid-3-img {
+        display: none;
+    } */
+
+    .bottom-img-2, .top-img-2, .mid-img-2 {
+        margin: 0 1rem;
+    }
+
+    img {
+        margin-right: 12.5rem;
+    }
+
+    .gallery-col___mid img {
+        margin-right: 12.5rem;
+        max-height: 17rem;
+        width: 190px;
+    }
+
 }

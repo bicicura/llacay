@@ -36,7 +36,26 @@ CAROUSEL
     background-image: url("../imgs/garden.png");
 }
 
+.logo-container {
+  opacity: 0;
+  transition: opacity 2s cubic-bezier(0.13, 0.77, 0.33, 1);
+}
 
+.logo-container.fade-in {
+  opacity: 1;
+}
+
+.bottom-lines__left.fade-in,
+.bottom-lines__right.fade-in {
+  transform: translateX(0%);
+  transition: transform 3s cubic-bezier(0.13, 0.77, 0.33, 1);
+}
+
+.top-lines__left.fade-in,
+.top-lines__right.fade-in {
+  transition: transform 3s cubic-bezier(0.13, 0.77, 0.33, 1);
+  transform: translateX(0%);
+}
 
 /* 
 ================
@@ -47,8 +66,104 @@ CENTER CONTAINER
 h1 {
     font-size: 4rem;
     margin-bottom: 0;
+    font-family: var(--ff-accent-alternative);
+    letter-spacing: .125rem;
 }
 
 .title-span {
     font-size: 2rem;
+    font-family: var(--ff-primary);
+    font-weight: 300;
+    margin-bottom: 0;
+}
+
+.index-main-container {
+    display: flex;
+    align-content: center;
+}
+
+.main-container::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  inset: 0;
+  background-color: rgba(0, 0, 0, .7);
+  backdrop-filter: blur(2px);
+  z-index: -1;
+}
+
+.index-main-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.index-center-title__container {
+    margin: auto 0;
+}
+
+.index-h1__span1, 
+.index-h1__span2,
+.index-p__span1, 
+.index-p__span2, 
+.index-p__span3 {
+  display: inline-block;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 2s cubic-bezier(0.13, 0.77, 0.33, 1),
+              opacity 2s cubic-bezier(0.13, 0.77, 0.33, 1);
+}
+
+.index-h1__span1.fade-in, 
+.index-h1__span2.fade-in,
+.index-p__span1.fade-in, 
+.index-p__span2.fade-in, 
+.index-p__span3.fade-in {
+
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+.index-h1__span1.fade-in { transition-delay: .33s; }
+.index-h1__span2.fade-in { transition-delay: .66s; }
+.index-p__span1.fade-in { transition-delay: .99s; }
+.index-p__span2.fade-in { transition-delay: 1.32s; }
+.index-p__span3.fade-in { transition-delay: 1.65s; }
+
+@media (max-width: 799px) {
+
+  html, body, .main {
+    height: 100%;
+  }
+
+  body {
+    max-width: 100%;
+    overflow-x: hidden!important;
+    /* overflow-y: hidden!important; */
+  }
+
+  .menu-center-container {
+      display: none;
+  }
+
+  .index-center-title__container {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .title-span {
+    font-size: 1.5rem;
+  }
+
+  .index-main-container, .carousel, .item {
+    height: 100%;
+  }
+  
+  .bc1, .bc2 {
+    background-size: cover;
+  }
+   
 }

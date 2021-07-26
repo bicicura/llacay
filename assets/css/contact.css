@@ -14,7 +14,9 @@ input:focus {
     outline: none;
 }
 
-
+.center-social-container {
+    display: none;
+}
 
 /* 
 =================
@@ -22,53 +24,55 @@ CONTACT CONTAINER
 =================
 */
 
-.center-container > *:nth-child(2) {
-    flex: 1 1 100%;
-}
-
-.center-title__container {
-    margin-left: 0;
+.contact-main-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
 }
 
 .contact-container {
-    width: 70%;
-    margin: 0 auto;
+    width: 60%;
+    max-width: 1080px;
     position: relative;
     padding: 5rem 4rem 3.5rem 5em;
     background-color: rgba(89, 89, 89, .2);
     backdrop-filter: blur(8px);
+    transform: translateX(10%);
 }
 
 .contact-title {
     position: absolute;
+    font-family: 'Playfair Display', serif;
     margin-left: 0;
     font-size: 2.5rem;
     top: -1.6rem;
 }
 
-/* .contact-text {
-
-} */
+.contact-text {
+    width: 50%;
+}
 
 .contact-text-small {
     max-width: 23ch;
 }
 
-.contact-bg {
+/* .contact-bg {
     position: fixed;
     inset: 0;
     background-color: red;
     z-index: -2;
     background-image: url("../imgs/contact-bg.png");
     background-repeat: no-repeat;
-    background-size: cover;
     background-position: center;
     background-size: 100%;
-}
+    background-size: cover;
+} */
 
 .social-icon + .social-icon {
     margin-left: 1.2rem;
 }
+
+
 
 /* 
 ====
@@ -79,38 +83,17 @@ FORM
 .contact-form {
     justify-content: space-between;
     margin-left: 0;
-}
-
-.contact-form > * + * {
-    margin-top: 1rem;
-}
-
-.contact-input__cont {
-    position: relative;
     width: 100%;
 }
 
-.contact-input__cont + .contact-input__cont {
-    margin-top: 1rem;
+.contact-input__cont {
+    width: 100%;
 }
 
 .contact-input {
     width: 100%;
 }
 
-.contact-label {
-    position: absolute;
-    left: 0;
-    top: 0;
-    pointer-events: none;
-    transition: top .7s cubic-bezier(0.13, 0.77, 0.33, 1);
-}
-
-.contact-label.goTop {
-    top: -30px;
-    left: -4%;
-    transform: scale(.8);
-}
 
 .contact-btn__container {
     width: 100%;
@@ -130,3 +113,107 @@ FORM
 .contact-socialicon__container {
     margin-top: 3rem;
 }
+
+
+
+/* 
+===========
+INPUTS FRAN
+===========
+*/
+
+.inputes {
+	outline: none;
+	font-family: 'Montserrat';
+	position: relative;
+	background: none;
+	border: none;
+	padding: 5px;
+	border-image-slice: 10;
+	border-bottom: 2px solid #b5b5b5;
+	font-size: 0.9em;
+	outline: none; 
+    color: white;
+    padding-left: .6rem;
+}
+
+.tags {
+	font-weight: 500;
+	color: white;
+	font-size: 0.7em;
+	transition: .25s;
+	transform: translate(20% , 160%) scale(1.4);
+	display: inline-block;
+    padding-left: .6rem;
+}
+
+.inputes:focus {
+	border-bottom: 2px solid white;
+}
+
+@media (max-width: 799px) {
+
+    .contact-main-container {
+        display: block;
+        margin-top: 6rem;
+    }
+
+    .contact-container {
+        width: 100%;
+        padding: 2.5rem;    
+        transform: translateX(0%);
+        backdrop-filter: blur(20px)!important;
+        z-index: 1;
+    }
+
+    body {
+        overflow-y: hidden;
+    }
+
+    .contact-title {
+        font-size: 2rem;
+        top: -1.2rem;
+    }
+
+    .contact-text {
+        width: 100%;
+    }
+
+    .contact-btn__container button {
+        width: 100%;
+        padding: 1rem 3rem;
+        margin-left: 0;
+    }
+
+    .contact-socialicon__container {
+        margin-top: 1.5rem;
+    }
+
+    .contact-btn__container {
+        margin-top: 2rem;
+        backdrop-filter: blur(20px)!important;
+    }
+    
+}
+
+.contact-input__cont, .contact-btn__container, .contact-socialicon__container, .contact-form, .contact-text, .contact-title, .contact-container  {
+    opacity: 0;
+}
+
+.contact-input__cont, .contact-btn__container, .contact-socialicon__container, .contact-form, .contact-text, .contact-title  {
+    transform: translateY(25%);
+}
+
+.contact-input__cont.fade-in, .contact-btn__container.fade-in, .contact-socialicon__container.fade-in, .contact-form.fade-in, .contact-text.fade-in, .contact-title.fade-in, .contact-container.fade-in  {
+    transform: translateY(0%);
+    transition: opacity .7s cubic-bezier(0.13, 0.77, 0.33, 1), transform .7s cubic-bezier(0.13, 0.77, 0.33, 1);
+    opacity: 1;
+}
+
+/* .contact-container { outline: 2px solid pink; } */
+
+.contact-form.fade-in  { transition-delay: .99s; }
+
+.contact-text.fade-in { transition-delay: .66s; }
+
+.contact-title.fade-in { transition-delay: .33s; }

@@ -1,0 +1,299 @@
+/* 
+=======
+GENERAL
+=======
+*/
+
+:root {
+    --clr-primary-100: #fdb90d;
+    --clr-primary-300: #FFF;
+    --clr-primary-500: #000;
+    font-size: 1rem;
+    --ff-primary: 'Poppins', sans-serif;
+    --ff-accent-alternative: 'Playfair Display', serif;
+    --ff-accent: "Jost", sans-serif;
+    color: var(--clr-primary-300);
+}
+
+*, 
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--ff-primary);
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-color: black;
+    color: white;
+}
+
+
+body,
+h1,
+h2
+h3,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--ff-primary);
+    font-weight: 900;
+    line-height: 1;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-bottom: 1em;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+.container {
+    margin: 0 auto;
+    width: min(90%, 87rem);
+    /* en pantallas chicas se va a quedar en 90% y en grandes va a llegar hasta 70.5rem de ancho */
+}
+
+.split {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 40em) {
+    .split {
+        flex-direction: row;
+    }
+
+    .split > * {
+        flex-basis: 100%;
+    }
+
+    .split > * + * {
+        margin-left: 2em;
+    }
+
+    .flex {
+        display: flex;
+    }
+    
+    .col {
+        flex-direction: column;
+    }
+}
+
+.container--narrow {
+    max-width: 34rem;
+}
+
+.bg-dark {
+    background-color: rgba(0,0,0,.8);
+}
+
+
+
+/* 
+==============
+MAIN CONTAINER
+==============
+*/
+
+.main-container {
+    width: 100%;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+
+
+
+.center-container > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-mask-transition {
+    position: absolute;
+    width: 100%;
+    min-height: inherit;
+    background-color: black;
+    opacity: 0;
+    z-index: -1;
+}
+/* 
+============
+TRANSICIONES
+============
+*/
+
+
+
+.inspiracion-transition,
+.contacto-transition,
+.recos-transition {
+    position: absolute;
+    width: 100%;
+    min-height: 100vh;
+    left: 0;
+    top: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 100%;
+    z-index: 88888;
+}
+
+.inspiracion-transition { background-image: url("../imgs/inspiracion.png"); }
+
+.contacto-transition{ background-image: url("../imgs/contact-bg.png"); }
+
+.recos-transition { background-image: url("../imgs/recos-bg.png"); }
+
+
+
+.inspiracion-bg-mask {
+    width: 100%;
+    min-height: inherit;
+    background-color: black;
+    opacity: .8;
+    transition: 6s cubic-bezier(0.13, 0.77, 0.33, 1);
+    z-index: -1;
+}
+
+.inspiracion-bg-mask.fade-out {
+    opacity: 0;
+}
+
+.galeria-transition {
+    width: 100%;
+    min-height: 100vh;
+    position: fixed;
+    inset: 0;
+    background: black;
+    z-index: 88888;
+    opacity: 0;
+    transition: opacity 1s cubic-bezier(0.49, 0.01, 0.32, 0.99);
+    pointer-events: none;
+}
+
+.galeria-transition.fade-in {
+    opacity: 1;
+}
+
+.galeria-transition.fade-out {
+    opacity: 0;
+}
+
+.main-container::before, .galeria-transition, .inspiracion-transition {
+    height: 100%;
+}
+
+/* 
+=====================================================================
+MEDIA QUERIES - para ajustar los padding y margin al tamaño correcto!
+=====================================================================
+*/
+
+@media (max-width: 1920px) {
+
+    /* body {
+        color: orange;
+    } */
+
+    :root {
+        font-size: 1.125rem;
+    }
+
+}
+
+@media (max-width: 1536px) {
+
+    /* body {
+        color: blue;
+    } */
+
+    :root {
+        font-size: 1rem;
+    }
+
+}
+
+
+
+@media (max-width: 1400px) {
+
+    /* body {
+        color: purple;
+    } */
+
+    :root {
+        font-size: .90rem;
+    }
+}
+
+@media (max-width: 1250px) {
+
+    /* body {
+        color: red;
+    } */
+
+    :root {
+        font-size: .78rem;
+    }
+}
+
+@media (max-width: 1029px) {
+    /* body {
+        color: green;
+    } */
+
+    :root {
+        font-size: .64rem;
+    }
+
+}
+
+/* 
+======
+MOBILE
+======
+*/
+
+@media (max-width: 799px) {
+    :root {
+        font-size: .875rem;
+    } 
+}
+
+
+
+body::-webkit-scrollbar {
+    display: none;
+  }

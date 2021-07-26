@@ -55,7 +55,7 @@ body {
     width: 1.6rem;
     margin: 0 auto;
     height: 1.8rem;
-    animation: load-rotate 1.2s cubic-bezier(.32,1,.69,.01) infinite;
+    animation: load-rotate 1.2s linear infinite;
 }
 
 h1 {
@@ -73,17 +73,17 @@ h1 {
         transform: rotate(0deg);
     }
 
-    25% {
+    /* 25% {
         transform: rotate(90%);
-    }
+    } */
 
     50% {
         transform: rotate(180%);
     }
 
-    75% {
+    /* 75% {
         transform: rotate(270%);
-    }
+    } */
 
     100% {
         transform: rotate(360deg);

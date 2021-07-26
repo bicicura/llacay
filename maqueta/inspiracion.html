@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/shared-alt.css">
+    <link rel="stylesheet" href="../assets/css/menu.css">
+    <link rel="stylesheet" href="../assets/css/inspiracion.css">
+    <link rel="stylesheet" href="../assets/css/anims.css">
+</head>
+<body>
+    <div id="menu-loader">
+        <section class="menu-container">
+            <header>
+                <div class="top-lines__cont">
+                    <div class="top-lines__left"></div>
+                    <div class="top-text__center flex">
+                        <div class="logo-container">
+                            <div class="logo"></div>
+                            <h2 class="logo-text">LLACAY ARQ</h2>
+                        </div>
+                    </div>
+                    <div class="top-lines__right"></div>
+                </div>
+            </header>
+        
+            <div>
+                <div class="menu-center-container">
+        
+                    <div class="center-menu__container">
+                        <nav>
+                            <ul class="nav-list">
+                                <li><a class="nav-a" id="gallery-spa" href="gallery-spa.html">GALERIA DE FOTOS</a></li>
+                                <li><a class="nav-a" href="">LO QUE NOS INSPIRA</a></li>
+                                <li><a class="nav-a" id="recomendaciones" href="recomendaciones.html">RECOMENDACIONES</a></li>
+                                <li><a class="nav-a" id="contacto" href="contacto.html">CONTACTO</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+        
+                    <div class="center-social-container">
+                        <i class="social-icon"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="instagram" class="svg-inline--fa fa-instagram fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg></i>
+                        <i class="social-icon"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-square" class="svg-inline--fa fa-facebook-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"></path></svg></i>
+                    </div>
+        
+                </div>
+            </div>
+        
+            <div>
+                <div class="bottom-lines__cont">
+                    <div class="bottom-lines__left-cont"><div class="bottom-lines__left"></div></div>
+                    <div class="bottom-lines__right-cont"><div class="bottom-lines__right"></div></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="inspiracion-container">
+        <div class="inspiracion-mainText__container">
+            <p>
+                Cuando tomamos un proyecto en Llacay Arquitectos vertemos todos nuestros talentos creativos y profesionales en él. Nos apasiona crear diseños que generen nuevas emociones y la manera en que las personas habitan lo que diseñamos a su medida.
+            </p>        
+        </div>
+        <div class="inspiracion-bg">
+            <div class="inspiracion-bg-mask"></div>
+        </div>
+        
+
+    </div>
+</body>
+
+<script>
+    const logoContainer = document.querySelector('.logo-container')
+    const lineasArriba = logoContainer.parentNode.parentNode.children
+    let topLinesLeft = lineasArriba[0]
+    let topLinesRight = lineasArriba[2]
+    let bottomLineLeft = document.querySelector('.bottom-lines__left')
+    let bottomLineRight = document.querySelector('.bottom-lines__right')
+    let bgMask = document.querySelector('.inspiracion-bg-mask')
+    let inspiracionMainText = document.querySelector('.inspiracion-mainText__container')
+    let inspiracionBg = document.querySelector('.inspiracion-bg')
+
+    window.addEventListener('load', (event) => {
+
+        inspiracionBg.classList.add('fade-in')
+
+        topLinesLeft.classList.remove('fade-in')
+        topLinesLeft.classList.add('fade-in')
+        topLinesRight.classList.add('fade-in')
+        bottomLineLeft.classList.add('fade-in')
+        bottomLineRight.classList.add('fade-in')
+
+        setTimeout(() => {
+        logoContainer.classList.add('fade-in')
+          }, 3000);
+
+        setTimeout(() => {
+        inspiracionMainText.classList.add('fade-out')
+        bgMask.classList.add('fade-out')
+        logoContainer.classList.add('fade-in')
+          }, 5000);
+    });
+
+    
+</script>
+</html>
