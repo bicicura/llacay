@@ -194,6 +194,25 @@ function removeDisappear() {
 const bgMaskTransition = document.querySelector('.bg-mask-transition')
 
 
+// ===================================================
+// Cortina de transiciones (fadea lo anterior a negro) 
+// ===================================================
+
+const cortinaTransition = document.querySelector('.cortina')
+
+function cortinaFadeIn() {
+    cortinaTransition.classList.remove('fade-out')
+    cortinaTransition.classList.add('fade-in')
+    setTimeout(() => { window.scrollTo(0, 0) }, 800);
+    
+}
+
+function cortinaFadeOut() {
+    cortinaTransition.classList.remove('fade-in')
+    cortinaTransition.classList.add('fade-out')
+}
+
+
 
 // ===========================================
 // Transición de cualquier vista a INSPIRACION 
@@ -203,7 +222,7 @@ const inspiracionBg = document.querySelector('.inspiracion-transition')
 
 function inspiracionBgTransition() {
     if (window.location.pathname.includes("inspiracion")) {
-
+        cortinaFadeIn()
         inspiracionBg.classList.remove('to-back')
         bgMaskTransition.classList.remove('to-back')
         bgMaskTransition.classList.remove('fade-out')
@@ -218,6 +237,7 @@ function inspiracionBgTransition() {
             bgMaskTransition.classList.add('to-back')
             inspiracionMainText.classList.add('fade-in')
             flechaScroll()
+            cortinaFadeOut()
         }, 1400)
 
         inspiracionAnimScroll()
@@ -248,20 +268,25 @@ const contactoBg = document.querySelector('.contacto-transition')
 
 function contactoBgTransition() {
     if (window.location.pathname.includes("contacto")) {
-
-        contactoBg.classList.remove('to-back')
-        bgMaskTransition.classList.remove('to-back')
-        bgMaskTransition.classList.remove('fade-out')
-        contactoBg.classList.remove('fade-out')
-        contactoBg.classList.add('fade-in')
-        bgMaskTransition.classList.add('fade-in')
+        cortinaFadeIn()
+        
+        setTimeout(() => {
+            cortinaFadeOut()
+            contactoBg.classList.remove('to-back')
+            bgMaskTransition.classList.remove('to-back')
+            bgMaskTransition.classList.remove('fade-out')
+            contactoBg.classList.remove('fade-out')
+            contactoBg.classList.add('fade-in')
+            bgMaskTransition.classList.add('fade-in')
+        }, 1400)
 
 
         setTimeout(() => {
+            
             contactoBg.classList.add('to-back')
             bgMaskTransition.classList.add('to-back')
             contactoFormAppear()
-        }, 1400)
+        }, 2400)
     }
 }
 
@@ -299,21 +324,25 @@ const recosBg = document.querySelector('.recos-transition')
 
 function recosBgTransition() {
     if (window.location.pathname.includes("recomendaciones")) {
-        recosBg.classList.remove('to-back')
-        bgMaskTransition.classList.remove('to-back')
-        bgMaskTransition.classList.remove('fade-out')
-        recosBg.classList.remove('fade-out')
-        recosBg.classList.add('fade-in')
-        bgMaskTransition.classList.add('fade-in')
+        cortinaFadeIn()
 
         setTimeout(() => {
+            recosBg.classList.remove('to-back')
+            bgMaskTransition.classList.remove('to-back')
+            bgMaskTransition.classList.remove('fade-out')
+            recosBg.classList.remove('fade-out')
+            recosBg.classList.add('fade-in')
+            bgMaskTransition.classList.add('fade-in')
+        }, 1400)
+
+        setTimeout(() => {
+            cortinaFadeOut()
             const recosContainer = document.querySelector('.reco-texts__container')
             recosContainer.classList.add('fade-in')
-
             recosBg.classList.add('to-back')
             bgMaskTransition.classList.add('to-back')
 
-        }, 1400)
+        }, 2400)
     }
 }
 
@@ -380,12 +409,13 @@ function galeriaBgTransitionReset() {
 
 function checkGaleria() {
     if (window.location.pathname.includes("galeria")) {
+        cortinaFadeIn()
         galeriaTransition()
         galeriaTransitionReset()
         removeDisappear()
-        setTimeout(() => {
-            rowAppear()
-            }, 1000);
+        setTimeout(() => { 
+            cortinaFadeOut()
+            rowAppear() }, 1000);
             $('.bottom-lines__active').css({'transform':'translateX(100%)'})
     }
 }
@@ -409,7 +439,7 @@ function checkRecos() {
         recosBgTransition()
         setTimeout(() => {
             recomendacionesLogica()
-            }, 1100);
+            }, 1500);
             $('.bottom-lines__active').css({'transform':'translateX(300%)'})
         }
        
@@ -417,6 +447,7 @@ function checkRecos() {
 
 function checkContacto() {
     if (window.location.pathname.includes("contacto")) {
+        // window.scrollTo(0, 0)
         removeDisappear()
         recosBgTransitionReset()
         inspiracionBgTransitionReset()

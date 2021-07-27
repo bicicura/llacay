@@ -4,6 +4,12 @@ GENERAL
 =======
 */
 
+@media (min-width: 40em) {
+    body {
+      overflow-y: hidden;
+    }
+  }
+
 input {
     background-color: transparent;
     border: none;
@@ -56,23 +62,9 @@ CONTACT CONTAINER
     max-width: 23ch;
 }
 
-/* .contact-bg {
-    position: fixed;
-    inset: 0;
-    background-color: red;
-    z-index: -2;
-    background-image: url("../imgs/contact-bg.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-    background-size: cover;
-} */
-
 .social-icon + .social-icon {
     margin-left: 1.2rem;
 }
-
-
 
 /* 
 ====

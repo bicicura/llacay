@@ -4,6 +4,12 @@ CAROUSEL
 ========
 */
 
+@media (min-width: 40em) {
+  body {
+    overflow-y: hidden;
+  }
+}
+
 .carousel {
     position: absolute;
     top: 0;

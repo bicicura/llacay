@@ -1,3 +1,11 @@
+.recos-transition, .bg-mask-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+
+
 .reco-texts__container {
     max-width: 68ch;
     background-color: rgba(0, 0, 0, .2);

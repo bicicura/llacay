@@ -176,7 +176,15 @@ TRANSICIONES
 
 .recos-transition { background-image: url("../imgs/recos-bg.png"); }
 
-
+.cortina {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    opacity: 0;
+    background-color: black;
+}
 
 .inspiracion-bg-mask {
     width: 100%;
