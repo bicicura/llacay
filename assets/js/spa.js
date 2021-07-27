@@ -282,7 +282,6 @@ function contactoBgTransition() {
 
 
         setTimeout(() => {
-            
             contactoBg.classList.add('to-back')
             bgMaskTransition.classList.add('to-back')
             contactoFormAppear()
@@ -327,6 +326,7 @@ function recosBgTransition() {
         cortinaFadeIn()
 
         setTimeout(() => {
+            cortinaFadeOut()
             recosBg.classList.remove('to-back')
             bgMaskTransition.classList.remove('to-back')
             bgMaskTransition.classList.remove('fade-out')
@@ -335,8 +335,7 @@ function recosBgTransition() {
             bgMaskTransition.classList.add('fade-in')
         }, 1400)
 
-        setTimeout(() => {
-            cortinaFadeOut()
+        setTimeout(() => {   
             const recosContainer = document.querySelector('.reco-texts__container')
             recosContainer.classList.add('fade-in')
             recosBg.classList.add('to-back')

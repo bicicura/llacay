@@ -133,12 +133,13 @@ INSPIRACION
 }
 
 .bg-mask-transition.fade-in {
-    opacity: .8;
+    opacity: .65;
     transition: transform 1.3s cubic-bezier(0.49, 0.01, 0.32, 0.99);
 }
 
 .bg-mask-transition.fade-out {
     opacity: 0;
+    transition-delay: .85s;
 }
 
 .inspiracion-transition.fade-out,
