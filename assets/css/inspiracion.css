@@ -12,13 +12,14 @@ body {
 }
 
 .inspiracion-mainText__container.fade-in {
-    transition: 6s cubic-bezier(0.13, 0.77, 0.33, 1);
+    transition: 3s cubic-bezier(0.13, 0.77, 0.33, 1);
     opacity: 1;
     transform: translateY(0%);
 }
 
 .inspiracion-mainText__container.fade-in.fade-out {
     transform: translateY(-100vh);
+    transition: 6s cubic-bezier(0.13, 0.77, 0.33, 1);
     }
 
 .inspiracion-bg {
@@ -33,7 +34,10 @@ body {
     width: 47ch;
     height: fit-content;
     position: absolute;
-    inset: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     margin: auto;
     max-width: 30%;
     opacity: 0;
@@ -58,6 +62,13 @@ body {
     margin: auto;
     cursor: pointer;
     width: 5%;
+    opacity: 0;
+}
+
+.banner__arrow.fade-in {
+    opacity: 1;
+    transition: opacity .7s cubic-bezier(0.13, 0.77, 0.33, 1);
+
 }
 
 .flecha {

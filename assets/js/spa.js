@@ -22,6 +22,35 @@ const ajax = (metodo, url, elemento) => {
 
 }
 
+
+
+// =================================================
+// Esperar a que cargue nuevo html y cargar nuevo js 
+// =================================================
+
+var waitUntil = function (fn, condition, interval) {
+    interval = interval || 100;
+
+    var shell = function () {
+            var timer = setInterval(
+                function () {
+                    var check;
+
+                    try { check = !!(condition()); } catch (e) { check = false; }
+
+                    if (check) {
+                        clearInterval(timer);
+                        delete timer;
+                        fn();
+                    }
+                },
+                interval
+            );
+        };
+
+    return shell;
+};
+
 // ============================================================
 // Si el window no tiene una ruta, redirije a la home con ajax()
 // ============================================================
@@ -59,8 +88,6 @@ links.forEach( link => {
     link.addEventListener('click', ev => {
         ev.stopPropagation()
         ev.preventDefault()
-        
-        // ajax('GET', ev.target.href, main)
 
         setTimeout(() => {
             ajax('GET', ev.target.href, main)
@@ -105,7 +132,7 @@ function removeActive() {
 function popStateActiveLink() {
     
     for (i = 0; i < links.length; i++) {
-        if (window.location.pathname.includes(links[i].id)) {
+        if (window.location.pathname.includes(links[i].getAttribute('data-menu'))) {
             removeActive()
             links[i].classList.add('active')
         }
@@ -118,7 +145,15 @@ function popStateActiveLink() {
 // ===============================================================================================================
 
 window.addEventListener("popstate", ev => {
+
     const url = history.state+'.html'
+
+    // Cheque en que vista está, para hacer las transiciones y traer el js que necesita
+    checkContacto()
+    checkInspiracion()
+    checkGaleria()
+    checkRecos()
+
     ajax("GET", url, main)
     popStateActiveLink()
 })
@@ -154,14 +189,11 @@ function menuRestart() {
 // ============================================
 
 function rowAppear() {
-
-    setTimeout(() => {
         const gallery = document.querySelectorAll('.gallery-cols__container div div')
         for(i = 0; i < gallery.length; i++) {
             gallery[i].classList.remove('fade-out')
             gallery[i].classList.add('fade-in')
         }
-            }, 100);
 }
 
 
@@ -221,24 +253,28 @@ function cortinaFadeOut() {
 const inspiracionBg = document.querySelector('.inspiracion-transition')
 
 function inspiracionBgTransition() {
-    if (window.location.pathname.includes("inspiracion")) {
+    if (window.location.pathname.includes("inspiracion-spa")) {
         cortinaFadeIn()
-        inspiracionBg.classList.remove('to-back')
-        bgMaskTransition.classList.remove('to-back')
-        bgMaskTransition.classList.remove('fade-out')
-        inspiracionBg.classList.remove('fade-out')
-        inspiracionBg.classList.add('fade-in')
-        bgMaskTransition.classList.add('fade-in')
 
+        setTimeout(() => {
+            cortinaFadeOut()
+            inspiracionBg.classList.remove('to-back')
+            bgMaskTransition.classList.remove('to-back')
+            bgMaskTransition.classList.remove('fade-out')
+            inspiracionBg.classList.remove('fade-out')
+            inspiracionBg.classList.add('fade-in')
+            bgMaskTransition.classList.add('fade-in')
+        }, 1400)
 
         setTimeout(() => {
             const inspiracionMainText = document.querySelector('.inspiracion-mainText__container')
+            const bannerArrow = document.querySelector('.banner__arrow')
             inspiracionBg.classList.add('to-back')
             bgMaskTransition.classList.add('to-back')
             inspiracionMainText.classList.add('fade-in')
+            bannerArrow.classList.add('fade-in')
             flechaScroll()
-            cortinaFadeOut()
-        }, 1400)
+        }, 2400)
 
         inspiracionAnimScroll()
     }
@@ -319,6 +355,8 @@ function contactoFormAppear() {
 // Transición Recos
 // ================
 
+
+
 const recosBg = document.querySelector('.recos-transition')
 
 function recosBgTransition() {
@@ -368,9 +406,14 @@ function inspiracionAnimScroll() {
 }
 
 
+
+
+
 // =======================================
 // Transición de cualquier vista a GALERIA 
 // =======================================
+
+
 
 function galeriaTransitionReset() {
     recosBg.classList.remove('fade-in')
@@ -379,6 +422,7 @@ function galeriaTransitionReset() {
     inspiracionBg.classList.add('fade-out')
     contactoBg.classList.remove('fade-in')
     contactoBg.classList.add('fade-out')
+    bgMaskTransition.classList.remove('fade-out-scroll')
 }
 
 const galeriaBtn = document.querySelector('#gallery-spa')
@@ -407,20 +451,35 @@ function galeriaBgTransitionReset() {
 // ===================================================================
 
 function checkGaleria() {
-    if (window.location.pathname.includes("galeria")) {
+    if (window.location.pathname.includes("gallery-spa")) {
+        removeDisappear()
         cortinaFadeIn()
         galeriaTransition()
         galeriaTransitionReset()
-        removeDisappear()
-        setTimeout(() => { 
-            cortinaFadeOut()
-            rowAppear() }, 1000);
-            $('.bottom-lines__active').css({'transform':'translateX(100%)'})
+        $('.bottom-lines__active').css({'transform':'translateX(100%)'})
+
+        setTimeout(() => {
+            waitUntil(
+                function () {
+                  // the code you want to run here...
+                  cortinaFadeOut()
+                  rowAppear()
+                },
+                function() {
+                  // the code that tests here... (return true if test passes; false otherwise)
+                  return !!(document.getElementById('img-fadea1').innerHTML !== '');
+                },
+                50 // amout to wait between checks
+              )();
+            }, 1500);
+            
     }
+
+    
 }
 
 function checkInspiracion() {
-    if (window.location.pathname.includes("inspiracion")) {
+    if (window.location.pathname.includes("inspiracion-spa")) {
         removeDisappear()
         contactoBgTransitionReset()
         recosBgTransitionReset()
@@ -445,7 +504,7 @@ function checkRecos() {
     }
 
 function checkContacto() {
-    if (window.location.pathname.includes("contacto")) {
+    if (window.location.pathname.includes("contacto-spa")) {
         // window.scrollTo(0, 0)
         removeDisappear()
         recosBgTransitionReset()
@@ -523,8 +582,7 @@ function recomendacionesLogica() {
     let display2 = ''
     let display3 = ''
     let intervalID = null;
-    var seconds = 0;
-    
+
     //  ===========================================================
     //  Acá arrancan el timer cada 15 segundos cambia el comentario
     //  ===========================================================
@@ -536,67 +594,24 @@ function recomendacionesLogica() {
          clearInterval(intervalID);
     }
     
-    function incrementSeconds() {
-        seconds += 1;
-    }
-    var secondsCount = setInterval(incrementSeconds, 1000);
-    
-    function cada15sCambio () {
+    function cada15sCambio() {
         if (display1) {
             console.log('pasaron 15 en reco1')
-            comentario_2()
-    
+            comentario_2 ()
         } else if (display2) {
             console.log('pasaron 15 en reco2')
-            comentario_3()
-     
+            comentario_3 ()
         }
         else {
             console.log('pasaron 15 en reco3')
-            comentario_1()
-    
+            comentario_1 ()
         }
     }
     
-    intervalManager(true, cada15sCambio,15000)
-    
-    //  =========================================
-    //  En hover al container, se pausea la linea
-    //  =========================================
-    
-    
-    function cambioEnHover() {
-        
-    
-        el.addEventListener('mouseenter', (ev)=> {
-            console.log(seconds)
-            let lineaTimer = document.querySelector('.reco-texts__line')
-            lineaTimer.classList.add('pause')
-            intervalManager(false)
-        })
-    
-        el.addEventListener('mouseover', (ev) => {
-            intervalManager(false)
-        })
-    
-    
-        el.addEventListener('mouseleave', (ev)=> {
-            let remain = 15000 - seconds*1000
-            intervalManager(true, cada15sCambio,remain)
-            let lineaTimer = document.querySelector('.reco-texts__line')
-            lineaTimer.classList.remove('pause')
-            // seconds = 0
-            })
-    
-    }
-    
-    cambioEnHover()
 
-
-
-//  ===============================
-//  Detecta si el browser es mobile
-//  ===============================
+//  ===========================================================================================================
+//  Detecta si el browser es mobile, sirve para asignar la altura correcta al contendor en dispositivos mobiles
+//  ===========================================================================================================
 
     window.mobileCheck = function() {
         let check = false;
@@ -605,14 +620,15 @@ function recomendacionesLogica() {
       };
 
 
-
 //  ==============================================
 //  Acá arrancan la declaracion de cada comentario
 //  ==============================================
     
-    function comentario_1 (){
-        intervalManager(false)
-        intervalManager(true, cada15sCambio,15000)    
+    function comentario_1 (){ 
+        if (!window.location.pathname.includes("recomendaciones")) {
+            clearTimeout(myTimer)
+        }
+
         if (display1) return
         else {
             if (window.mobileCheck()) {
@@ -632,8 +648,10 @@ function recomendacionesLogica() {
     }
     
     function comentario_2() {
-        intervalManager(false)
-        intervalManager(true, cada15sCambio,15000)
+        if (!window.location.pathname.includes("recomendaciones")) {
+            clearTimeout(myTimer)
+        }
+
         if (display2) return
         else {
             if (window.mobileCheck()) {
@@ -651,8 +669,10 @@ function recomendacionesLogica() {
     }
     
     function comentario_3() {
-        intervalManager(false)
-        intervalManager(true, cada15sCambio,15000)
+        if (!window.location.pathname.includes("recomendaciones")) {
+            clearTimeout(myTimer)
+        }
+
         if (display3) return
         else {
             if (window.mobileCheck()) {
@@ -665,18 +685,52 @@ function recomendacionesLogica() {
             <span><b>Ipsum Dolor</b></span><div class="reco-texts__line"></div>`, display3, display1 = false, display2 = false]
         }
     }
+
+
+    //  ==============================================================
+    //  changer() hace que cuando la var counter llegue a 14, 
+    //  se cambia el comentario al llamar a la funcion cada15sCambio()
+    //  ==============================================================
+    var counter = 0;
+    
+    function changer(){
+      if (counter >= 14){
+        console.log('cambia de comentario')
+        cada15sCambio()
+        counter = 0;
+        };
+    
+      counter++;
+      console.log(counter + 's')
+    
+    };
+    
+    var myTimer = setInterval(changer, 1000);
+    
+    // Se para el timer y la barra de progreso en mouse over
+    el.addEventListener("mouseover", function(){
+        intervalManager(false)
+        clearInterval(myTimer)
+        let lineaTimer = document.querySelector('.reco-texts__line')
+        lineaTimer.classList.add('pause')
+    }); 
+    
+    // Se reanuda la barra y timer en mouse out 
+    el.addEventListener("mouseout", function(){
+        myTimer = setInterval(changer, 1000);
+        let lineaTimer = document.querySelector('.reco-texts__line')
+        lineaTimer.classList.remove('pause')
+    });
     
     
     
     //  ====================================================
     //  Cuando se carga la vista, carga el primer comentario
     //  ====================================================
-    
     comentario_1()
     display1 = true
     
-    
-    
+
     //  ============================================================
     //  Para que no se llame muchas veces al pepe a manejoViewport()
     //  ============================================================
@@ -698,10 +752,14 @@ function recomendacionesLogica() {
     //  ==================================
     
     let manejoViewport = () => {
+
                  
         var scroll = $(window).scrollTop();
         console.log(scroll);
         if (scroll < 99) {
+            clearInterval(myTimer)
+            counter = 0
+            myTimer = setInterval(changer, 1000);
             comentario_1()
             display1 = true
             display2 = false
@@ -710,6 +768,9 @@ function recomendacionesLogica() {
         };
         
         if (scroll >= 100) {
+            clearInterval(myTimer)
+            counter = 0
+            myTimer = setInterval(changer, 1000);
             comentario_2()
             display1 = false
             display2 = true
@@ -718,12 +779,13 @@ function recomendacionesLogica() {
         };
     
         if (scroll >= 200) {
+            clearInterval(myTimer)
+            counter = 0
+            myTimer = setInterval(changer, 1000);
             comentario_3()
             display1 = false
             display2 = false
             display3 = true
-            let comentario3 = comentario_3[1]
-            console.log(comentario3)
         };
     
     };

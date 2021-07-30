@@ -99,6 +99,8 @@ FORM
     color: white;
     padding: .5rem 3rem;
     border: none;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
     margin-left: auto;
 }
 

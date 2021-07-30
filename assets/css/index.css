@@ -21,6 +21,10 @@ CAROUSEL
     z-index: -2;
 }
 
+.carousel * {
+  width: 100vw;
+}
+
 .item {
     min-height: 100vh;
     position: relative;
@@ -31,7 +35,6 @@ CAROUSEL
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-size: 100%;
 }
 
 .bc1 {
@@ -116,8 +119,7 @@ h1 {
   display: inline-block;
   transform: translateY(100%);
   opacity: 0;
-  transition: transform 2s cubic-bezier(0.13, 0.77, 0.33, 1),
-              opacity 2s cubic-bezier(0.13, 0.77, 0.33, 1);
+
 }
 
 .index-h1__span1.fade-in, 
@@ -125,7 +127,8 @@ h1 {
 .index-p__span1.fade-in, 
 .index-p__span2.fade-in, 
 .index-p__span3.fade-in {
-
+  transition: transform 2s cubic-bezier(0.13, 0.77, 0.33, 1),
+              opacity 2s cubic-bezier(0.13, 0.77, 0.33, 1);
   transform: translateY(0%);
   opacity: 1;
 }
