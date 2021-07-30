@@ -89,6 +89,7 @@ links.forEach( link => {
         ev.stopPropagation()
         ev.preventDefault()
 
+        // Este setTimeout es para las transiciones, no se borra la vista anterior al toque de entrar a una nueva, sino que deja que el fade out lo tape antes de borrarse
         setTimeout(() => {
             ajax('GET', ev.target.href, main)
                 }, 1000);
@@ -407,6 +408,38 @@ function inspiracionAnimScroll() {
 
 
 
+// ==========================================
+// GALERIA dar color cuando entra al viewport 
+// ==========================================
+
+
+function galeriaColorEnViewport() {
+    const faders = document.querySelectorAll('.appear-color');
+
+    const appearOptions = {
+        threshold: 0.30,
+        rootMargin: "-100px 0px -200px 0px"
+    }
+
+
+    const appearColor = new IntersectionObserver(function(entries, appearColor) {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+            entry.target.classList.remove('appear');
+        return
+        } else {
+        entry.target.classList.add('appear');
+        //    appearOnScroll.unobserve(entry.target);
+        }
+    })
+    }, appearOptions);
+
+    faders.forEach(fader => {
+        appearColor.observe(fader);
+    })
+
+}
+
 
 
 // =======================================
@@ -464,6 +497,7 @@ function checkGaleria() {
                   // the code you want to run here...
                   cortinaFadeOut()
                   rowAppear()
+                  galeriaColorEnViewport()
                 },
                 function() {
                   // the code that tests here... (return true if test passes; false otherwise)
@@ -795,3 +829,5 @@ function recomendacionesLogica() {
     window.addEventListener('scroll', manejoViewport)
 
 }
+
+

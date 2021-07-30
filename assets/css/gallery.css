@@ -55,6 +55,19 @@ img {
     display: none;
 }
 
+.gallery-img--mid__container img {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    transition: filter 1.2s cubic-bezier(0.13, 0.77, 0.33, 1);
+    
+}
+
+.gallery-img--mid__container img:hover, .gallery-img--mid__container img.appear {
+    
+    -webkit-filter: none;
+    filter: unset!important;
+}
+
 @media (max-width: 799px) {
 
     .top-lines__left, .top-lines__right
