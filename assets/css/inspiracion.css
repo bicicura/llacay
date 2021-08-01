@@ -28,6 +28,7 @@ body {
     min-height: inherit;
     position: relative;
     z-index: 100;
+    
 }
 
 .inspiracion-mainText__container {
@@ -122,7 +123,7 @@ body {
     }
 
     .inspiracion-container {
-        min-height: 100%;
+        height: 100%;
     }
 
     .inspiracion-mainText__container {
@@ -131,9 +132,25 @@ body {
     }
 
     .inspiracion-bg {
-        min-height: 100%;
-        background-size: cover;
-        background-position: center;
+        height: 100%;
         /* CHEQUEAR ESTO! */
+        display:inline-block;
+        position:relative;
+        top:50%;
+        transform:translateY(-57%);
+
+    }
+
+    .banner__arrow {
+        width: 20%;
+        bottom: 9.2rem;
+    }
+
+    .inspiracion-img-cont {
+        min-height: 100%;
+    }
+    
+    .inspiracion-img-cont img {
+    object-fit: cover;
     }
 }

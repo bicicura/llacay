@@ -14,6 +14,7 @@ input {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid white;
+    font-family: "Poppins", sans-serif;
 }
 
 input:focus {
@@ -118,7 +119,7 @@ INPUTS FRAN
 
 .inputes {
 	outline: none;
-	font-family: 'Montserrat';
+	font-family: 'Poppins', sans-serif;
 	position: relative;
 	background: none;
 	border: none;
@@ -148,8 +149,11 @@ INPUTS FRAN
 @media (max-width: 799px) {
 
     .contact-main-container {
-        display: block;
-        margin-top: 6rem;
+        /* display: block; */
+        position: fixed;
+        /* margin-top: 7.5rem; */
+        top:50%;
+        transform:translateY(-50%);
     }
 
     .contact-container {
@@ -160,13 +164,9 @@ INPUTS FRAN
         z-index: 1;
     }
 
-    body {
-        overflow-y: hidden;
-    }
-
     .contact-title {
-        font-size: 2rem;
-        top: -1.2rem;
+        font-size: 1.6rem;
+        top: -.85rem;
     }
 
     .contact-text {

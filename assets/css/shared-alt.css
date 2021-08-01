@@ -297,7 +297,14 @@ MOBILE
 @media (max-width: 799px) {
     :root {
         font-size: .875rem;
-    } 
+    }
+
+    .recos-transition.display-none,
+    .inspiracion-transition.display-none,
+    .bg-mask-transition.display-none,
+    .contacto-transition.display-none {
+        display: none!important;
+    }
 }
 
 

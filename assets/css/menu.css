@@ -164,8 +164,59 @@ FOOTER
     border-top: 1px solid rgba(255, 255, 255, 0.6);
 }
 
+.bottom-lines__dashed-recos {
+    width: 100%;
+    position: absolute;
+    height: 1rem;
+    left: 0;
+    top: 0;
+    display: none;
+    transition: opacity 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    justify-content: center;
+
+}
+
+.bottom-lines__dashed-recos.fade-in {
+    opacity: 1;
+    display: flex;
+    transition-delay: 1s;
+}
+
+.bottom-lines__dashed-recos.fade-out {
+    opacity: 0;
+    transition-delay: 0s;
+}
+
+.bottom-lines__dashed_1, .bottom-lines__dashed_2, .bottom-lines__dashed_3  {
+    width: 8rem;
+    height: 3px;
+    background-color: white;
+    opacity: .3;
+    transition: opacity 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
 
 
+
+.bottom-lines__left.fade-out,
+.bottom-lines__right.fade-out,
+.bottom-lines__active.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+.bottom-lines__left.fade-in,
+.bottom-lines__right.fade-in,
+.bottom-lines__active.fade-in,
+.bottom-lines__dashed_1.fade-in,
+.bottom-lines__dashed_2.fade-in,
+.bottom-lines__dashed_3.fade-in {
+    opacity: 1;
+    transition: opacity 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+.bottom-lines__dashed_2 {
+    margin: 0 2rem;
+}
 
 /* 
 ============
@@ -237,6 +288,10 @@ FIRST LOADER
 
 @media (max-width: 799px) {
 
+    .movida {
+        transform: translateY(-25%);
+    }
+
     header {
         width: 100vw;
         position: fixed;
@@ -245,6 +300,10 @@ FIRST LOADER
 
     .logo-text {
         font-size: 1.25rem;
+    }
+
+    .span-loader {
+        margin-top: 1.2rem;
     }
 
     .logo { 
@@ -322,7 +381,7 @@ FIRST LOADER
        transition: color 0.3s ease;
      }
      
-     #menuToggle a:hover
+     #menuToggle a.active
      {
        color: #FDB90D;
      }
@@ -376,8 +435,7 @@ FIRST LOADER
      {
        opacity: 1;
        transform: rotate(45deg) translate(-2px, -1px);
-       background: white;
-       
+       background: white;       
      }
      
      /*
@@ -433,6 +491,7 @@ FIRST LOADER
        opacity: 1;
        visibility: visible;
      }
+
 }
 
 .bottom-lines__active {
@@ -443,7 +502,7 @@ FIRST LOADER
     top: 0;
     left: 25rem;
     transform: translateX(0);
-    transition: transform 1s cubic-bezier(0.13, 0.77, 0.33, 1);
+    transition: transform 1s cubic-bezier(0.13, 0.77, 0.33, 1)!important;
 }
 
 @media (max-width: 799px) {

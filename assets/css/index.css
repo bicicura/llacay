@@ -157,6 +157,10 @@ h1 {
 
   .index-center-title__container {
     width: 100%;
+    position:sticky;
+    display:inline-block;
+    top:50%;
+    transform:translateY(-60%);
   }
 
   h1 {

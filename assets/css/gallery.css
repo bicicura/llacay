@@ -70,6 +70,18 @@ img {
 
 @media (max-width: 799px) {
 
+    html {
+        height: 100%;
+      }
+
+    body {
+        height: 100%
+    }
+
+    main, main div {
+        height: 100%;
+    }
+
     .top-lines__left, .top-lines__right
 
     .logo-container {
@@ -91,13 +103,16 @@ img {
     
     .split {
         flex-direction: column;
+        justify-content: center;
     }
 
     .gallery-section {
         width: max-content;
-        height: 38rem;
+        height: fit-content;
         /* border: 2px solid salmon; */
-        margin-top: 3.5rem;
+        /* margin-top: 3.5rem; */
+        position:relative;
+        display:inline-block;
         /* height: 87vh; ANTES ESTABA ASI */
     }
 
