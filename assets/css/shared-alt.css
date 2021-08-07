@@ -10,7 +10,7 @@ GENERAL
     --clr-primary-500: #000;
     font-size: 1rem;
     --ff-primary: 'Poppins', sans-serif;
-    --ff-accent-alternative: 'Playfair Display', serif;
+    --ff-accent-alternative: 'playfair-display', serif;
     --ff-accent: "Jost", sans-serif;
     color: var(--clr-primary-300);
 }

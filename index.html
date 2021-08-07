@@ -9,7 +9,10 @@
     <!-- tipografías -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;500&family=Playfair+Display+SC&family=Poppins:ital,wght@0,300;0,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;500&family=Poppins:ital,wght@0,300;0,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/spd3hrc.css">
+
+
 
     <!-- estilos de vistas compartidos -->
     <link rel="stylesheet" href="assets/css/shared-alt.css">
@@ -52,10 +55,10 @@
             <span></span>
             <span></span>
             <ul id="menu">
-                <li><a class="nav-a" data-menu="gallery-spa" href="gallery-spa.html">GALERIA DE FOTOS</a></li>
-                <li><a class="nav-a" data-menu="inspiracion-spa"  href="inspiracion-spa.html">LO QUE NOS INSPIRA</a></li>
+                <li><a class="nav-a" data-menu="galeria" href="galeria.html">GALERIA DE FOTOS</a></li>
+                <li><a class="nav-a" data-menu="inspiracion"  href="inspiracion.html">LO QUE NOS INSPIRA</a></li>
                 <li><a class="nav-a" data-menu="recomendaciones" href="recomendaciones.html">RECOMENDACIONES</a></li>
-                <li><a class="nav-a" data-menu="contacto-spa" href="contacto-spa.html">CONTACTO</a></li>
+                <li><a class="nav-a" data-menu="contacto" href="contacto.html">CONTACTO</a></li>
             </ul>
         </div>
     </nav>
@@ -85,10 +88,10 @@
                     <div class="center-menu__container">
                         <nav>
                             <ul class="nav-list">
-                                <li><a class="nav-a" data-menu="gallery-spa" id="gallery-spa" href="gallery-spa.html">GALERIA DE FOTOS</a></li>
-                                <li><a class="nav-a" id="inspiracion" data-menu="inspiracion-spa" href="inspiracion-spa.html">LO QUE NOS INSPIRA</a></li>
+                                <li><a class="nav-a" data-menu="galeria" id="gallery-spa" href="galeria.html">GALERIA DE FOTOS</a></li>
+                                <li><a class="nav-a" id="inspiracion" data-menu="inspiracion" href="inspiracion.html">LO QUE NOS INSPIRA</a></li>
                                 <li><a class="nav-a" data-menu="recomendaciones" id="recomendaciones" href="recomendaciones.html">RECOMENDACIONES</a></li>
-                                <li><a class="nav-a" data-menu="contacto-spa" id="contacto" href="contacto-spa.html">CONTACTO</a></li>
+                                <li><a class="nav-a" data-menu="contacto" id="contacto" href="contacto.html">CONTACTO</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -122,6 +125,22 @@
 
     <main>
 
+        <link rel="stylesheet" href="assets/css/index.css">
+
+        <div class="main-container index-main-container flex col">
+            <div class="carousel">
+                <div class="owl-carousel owl-theme">
+                    <div class="item"><img class="bc-img" src="assets/imgs/roof-top.png" alt="" onload="this.style.opacity='1'"></div>
+                    <div class="item"><img class="bc-img" src="assets/imgs/garden.png" alt="" onload="this.style.opacity='1'"></div>
+                </div>
+            </div>
+
+            <div class="index-center-title__container text-center">
+                <h1 class="index-h1"><span class="index-h1__span1">Acá</span> <span class="index-h1__span2">empieza</span></h1>
+                <p class="title-span"><span class="index-p__span1">tu</span> <span class="index-p__span2">nuevo</span> <span class="index-p__span3">proyecto</span></p>
+            </div>
+        </div>
+
     </main>
 
     <!-- termina main -->
@@ -142,8 +161,20 @@
 <!-- script para el loader -->
 <script>
     let loader = document.querySelector('.loader-content__cont')
-    window.addEventListener('load', vanish)
-    window.addEventListener('load', linesdisAppear)
+
+    function homeTitleAppear() {
+        titleCont = document.querySelector('.index-center-title__container')
+        titleH1 = titleCont.children[0]
+        titleP = titleCont.children[1] 
+
+        for (i = 0; i < titleH1.children.length; i++) {
+            titleH1.children[i].classList.add('fade-in')
+        }
+
+        for (i = 0; i < titleP.children.length; i++) {
+            titleP.children[i].classList.add('fade-in')
+        }
+    }
 
     function linesdisAppear() {
     logoContainer.classList.add('disappear')
@@ -154,33 +185,56 @@
 }
 
     function vanish() {
+            // setTimeout(() => {
+                loader.classList.add('loader-disappear')
+        // }, 1500); 
+        }
+
+    function homeAppear(){
+        
+            setTimeout(() => {
+            linesAppear()
+            homeTitleAppear()
+        }, 400); 
+
         setTimeout(() => {
-            loader.classList.add('loader-disappear')
-    }, 1500); 
+            loader.remove()
+        }, 2500);
+
     }
 
-$(document).ready(function(){
-    
-        setTimeout(() => {
-        linesAppear()
-        homeTitleAppear()
-        loader.remove()
-    }, 2400); 
+    window.addEventListener('load', vanish)
+    window.addEventListener('load', linesdisAppear)
+    window.addEventListener('load', homeAppear)
+
+
+// ==============
+// CAROUSEL INDEX
+// ==============
+
+
+$('.owl-carousel').owlCarousel({
+    loop:true,
+    // animateOut: 'fadeOut',
+    slideSpeed: 500,
+    margin:0,
+    autoplay: true,
+    autoplayTimeout:5000,
+    nav:false,
+    dots: false,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:1
+        },
+        1000:{
+            items:1
+        }
+    }
 })
 
-function homeTitleAppear() {
-    titleCont = document.querySelector('.index-center-title__container')
-    titleH1 = titleCont.children[0]
-    titleP = titleCont.children[1] 
-
-    for (i = 0; i < titleH1.children.length; i++) {
-        titleH1.children[i].classList.add('fade-in')
-    }
-
-    for (i = 0; i < titleP.children.length; i++) {
-        titleP.children[i].classList.add('fade-in')
-    }
-}
 
 
 

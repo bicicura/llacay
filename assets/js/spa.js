@@ -66,11 +66,17 @@ var waitUntil = function (fn, condition, interval) {
 // ============================================================
 
 const main = document.querySelector("main")
-ajax('GET', 'home.html', main)
+// ajax('GET', 'home.html', main)
 
-// ===============================================================================================================
-// clasesLinks() hace que se le asigne al link correcto la clase activa (cuando navegas con clickeando el nav bar)
-// ===============================================================================================================
+// if (window.location.pathname.includes('inspiracion')) {
+//     ajax('GET', 'inspiracion.html', main)
+// }
+
+const links = document.querySelectorAll('.nav-a')
+
+// ===========================================================================================================
+// clasesLinks() hace que se le asigne al link correcto la clase activa (cuando navegas clickeando el nav bar)
+// ===========================================================================================================
 
 const clasesLinks = link => {
     const links = link.parentNode.parentNode.children
@@ -87,17 +93,42 @@ const clasesLinks = link => {
 
 
 
+// ===========================================================================================================
+// preventCambiarRapidoVista() hace que desde se clickea un link a otra vista, por los proximos 3s no se puede
+// clickear otro. Esto previene que las transiciones se superpongan y se lageen
+// ===========================================================================================================
+
+function preventCambiarRapidoVista() {
+    for (i = 0; i < links.length; i++) {
+            links[i].style.pointerEvents = 'none'   
+        }
+
+    setTimeout(() => {
+        for (i = 0; i < links.length; i++) {
+            links[i].style.pointerEvents = 'all'   
+        }
+        }, 3000)
+    }
+
+
+   
 // =============================================================================================
 // Esta iteracion de LINKS se dispara con el evento CLICK. Busca en la
 // función AJAX la vista correcta y le asigna con clasesLinks() la clase activa al link adecuado
 // =============================================================================================
 
-const links = document.querySelectorAll('.nav-a')
-
 links.forEach( link => {
     link.addEventListener('click', ev => {
         ev.stopPropagation()
         ev.preventDefault()
+
+        // Chequea que apretes un nav-a que no sea en el que ya estas. Para que no se repita la misma transicion seguida
+        if (link.classList.contains('active')) {
+            console.log('estas en la misma movida')
+            return
+        }
+
+        preventCambiarRapidoVista()
 
         // Este setTimeout es para las transiciones, no se borra la vista anterior al toque de entrar a una nueva, sino que deja que el fade out lo tape antes de borrarse
         setTimeout(() => {
@@ -116,13 +147,12 @@ links.forEach( link => {
             mobileIndexHideTransitions()
         }
         // Cheque en que vista está, para hacer las transiciones y traer el js que necesita
-        checkInspiracion()
         checkGaleria()
-        checkContacto()
+        checkInspiracion()
         checkRecos()
+        checkContacto()
         
     }) 
-
     
 } )
 
@@ -263,6 +293,7 @@ function cortinaFadeOut() {
 }
 
 function addDisplayNoneTransitions() {
+    if (!window.mobileCheck()) return
     // bgMaskTransition.classList.add('display-none')
     inspiracionBg.classList.add('display-none')
     recosBg.classList.add('display-none')
@@ -270,10 +301,10 @@ function addDisplayNoneTransitions() {
 }
 
 function removeDisplayNoneTransitions() {
-    // bgMaskTransition.classList.remove('display-none')
+    if (!window.mobileCheck()) return
     inspiracionBg.classList.remove('display-none')
     recosBg.classList.remove('display-none')
-    // contactoBg.classList.remove('display-none')
+
 }
 
 
@@ -285,7 +316,7 @@ function removeDisplayNoneTransitions() {
 const inspiracionBg = document.querySelector('.inspiracion-transition')
 
 function inspiracionBgTransition() {
-    if (window.location.pathname.includes("inspiracion-spa")) {
+    if (window.location.pathname.includes("inspiracion")) {
         cortinaFadeIn()
 
         setTimeout(() => {
@@ -306,9 +337,9 @@ function inspiracionBgTransition() {
             inspiracionMainText.classList.add('fade-in')
             bannerArrow.classList.add('fade-in')
             flechaScroll()
+            inspiracionAnimScroll()
         }, 2400)
 
-        inspiracionAnimScroll()
     }
 }
 
@@ -437,7 +468,7 @@ function inspiracionAnimScroll() {
             })
         }
         else {
-            $(window).one('touchend', function() {
+            $('main').one('touchend', function() {
                 const inspiracionMainText = document.querySelector('.inspiracion-mainText__container')
                 console.log('escroleaste en mobile!')
                 inspiracionMainText.classList.add('fade-out')
@@ -457,8 +488,8 @@ function galeriaColorEnViewport() {
     const faders = document.querySelectorAll('.appear-color');
 
     const appearOptions = {
-        threshold: 0.30,
-        rootMargin: "-100px 0px -200px 0px"
+        threshold: 0.90
+        // rootMargin: "-100px 0px -200px 0px"
     }
 
 
@@ -480,9 +511,9 @@ function galeriaColorEnViewport() {
 
 }
 
-// ============================================================
-// MENU MOBILE se cierra al apretar un li y se le asigna active
-// ============================================================
+// ======================================
+// MENU MOBILE se cierra al apretar un li 
+// ======================================
 
 $('.nav-a').click(function(ev) {
     if (!window.mobileCheck()) return
@@ -532,11 +563,11 @@ function galeriaBgTransitionReset() {
 // ACA ARRANCA PARA HACER TAPAR EN MOBILE EN INDEX Y CONTACTO LAS TRANSICIONES DE ABAJO
 
 function mobileIndexHideTransitions() {
-    if (!window.mobileCheck) return
+    if (!window.mobileCheck()) return
     else{
-        if (!window.location.pathname.includes("inspiracion-spa") &&
-        !window.location.pathname.includes("contacto-spa") &&
-        !window.location.pathname.includes("gallery-spa") &&
+        if (!window.location.pathname.includes("inspiracion") &&
+        !window.location.pathname.includes("contacto") &&
+        !window.location.pathname.includes("galeria") &&
         !window.location.pathname.includes("recomendaciones")
         ) {
                 bgMaskTransition.classList.add('display-none')
@@ -589,13 +620,13 @@ function recosBottomBarFade() {
 // ===================================================================
 
     function checkGaleria() {
-    if (window.location.pathname.includes("gallery-spa")) {
+    if (window.location.pathname.includes("galeria")) {
         if (window.mobileCheck()) {
             removeDisplayNoneTransitions()
             bgMaskTransition.classList.add('display-none')
-                inspiracionBg.classList.add('display-none')
-                recosBg.classList.add('display-none')
-                contactoBg.classList.add('display-none')
+            inspiracionBg.classList.add('display-none')
+            recosBg.classList.add('display-none')
+            contactoBg.classList.add('display-none')
         }
         bottomBarFade()
         removeDisappear()
@@ -626,7 +657,10 @@ function recosBottomBarFade() {
 }
 
 function checkInspiracion() {
-    if (window.location.pathname.includes("inspiracion-spa")) {
+    
+    if (!window.location.pathname.includes("inspiracion")) return 
+
+    else {
         if (window.mobileCheck()) {
             removeDisplayNoneTransitions()
         }
@@ -640,7 +674,8 @@ function checkInspiracion() {
 }
 
 function checkRecos() {
-    if (window.location.pathname.includes("recomendaciones")) {
+    if (!window.location.pathname.includes("recomendaciones")) return
+    else {
         if (window.mobileCheck()) {
             removeDisplayNoneTransitions()
         }
@@ -670,7 +705,8 @@ function checkRecos() {
 
 
 function checkContacto() {
-    if (window.location.pathname.includes("contacto-spa")) {
+    if (!window.location.pathname.includes("contacto")) return
+    else {
         if (window.mobileCheck()) {
             removeDisplayNoneTransitions()
         }
@@ -712,43 +748,14 @@ function inputsDinamicos() {
 }
 
 
-// ==============
-// CAROUSEL INDEX
-// ==============
-
-function carouselIndex() {
-    $('.owl-carousel').owlCarousel({
-        loop:true,
-        // animateOut: 'fadeOut',
-        slideSpeed: 500,
-        margin:0,
-        autoplay: true,
-        autoplayTimeout:5000,
-        nav:false,
-        dots: false,
-        responsive:{
-            0:{
-                items:1
-            },
-            600:{
-                items:1
-            },
-            1000:{
-                items:1
-            }
-        }
-    })
-}
-
-setTimeout(() => {
-    carouselIndex()
-}, 1000); 
 
 // ==================
 // Recomendaciones JS
 // ==================
 
 function recomendacionesLogica() {
+
+    if (!window.location.pathname.includes('recomendaciones')) return
 
     let el = document.querySelector('.reco-texts__container')
     let el2 = document.querySelector('.reco-texts__1')
@@ -791,6 +798,7 @@ function recomendacionesLogica() {
     function comentario_1 (){ 
         if (!window.location.pathname.includes("recomendaciones")) {
             clearTimeout(myTimer)
+            return
         }
 
         if (display1) return
@@ -818,6 +826,7 @@ function recomendacionesLogica() {
     function comentario_2() {
         if (!window.location.pathname.includes("recomendaciones")) {
             clearTimeout(myTimer)
+            return
         }
 
         if (display2) return
@@ -842,6 +851,7 @@ function recomendacionesLogica() {
     function comentario_3() {
         if (!window.location.pathname.includes("recomendaciones")) {
             clearTimeout(myTimer)
+            return
         }
 
         if (display3) return
@@ -868,14 +878,20 @@ function recomendacionesLogica() {
     var counter = 0;
     
     function changer(){
-      if (counter >= 14){
-        console.log('cambia de comentario')
-        cada15sCambio()
-        counter = 0;
-        };
-    
-      counter++;
-      console.log(counter + 's')
+        if (!window.location.pathname.includes('recomendaciones')) {
+            clearInterval(myTimer)
+            return
+        }
+        else {
+            if (counter >= 14){
+                console.log('cambia de comentario')
+                cada15sCambio()
+                counter = 0;
+                };
+            
+              counter++;
+              console.log(counter + 's')
+        }
     
     };
     
@@ -919,18 +935,89 @@ function recomendacionesLogica() {
         }
     }
     
-    
+    window.scrollTo(0, 499)
     
     //  ==================================
     //  Cambio de comentario con el scroll
     //  ==================================
     
     let manejoViewport = () => {
+        if (!window.location.pathname.includes('recomendaciones')) {
+            clearInterval(myTimer)
+            return
+        }
+
+        console.log('escroleaste')
 
                  
         var scroll = $(window).scrollTop();
         console.log(scroll);
-        if (scroll < 99) {
+        if (scroll <= 500) {
+            if (!window.location.pathname.includes('recomendaciones')) {
+                clearInterval(myTimer)
+                return
+            }
+            if (display1) return
+            console.log('Entraste en el coment' + scroll)
+            clearInterval(myTimer)
+            counter = 0
+            myTimer = setInterval(changer, 1000);
+            comentario_1()
+            display1 = true
+            display2 = false
+            display3 = false
+            window.scrollTo(0, 499)
+            
+            
+        };
+        
+        if (scroll > 500 && scroll <= 1000) {
+            if (!window.location.pathname.includes('recomendaciones')) {
+                clearInterval(myTimer)
+                return
+            }
+            if (display2) return
+            console.log('Entraste en el coment' + scroll)
+            clearInterval(myTimer)
+            counter = 0
+            myTimer = setInterval(changer, 1000);
+            comentario_2()
+            display1 = false
+            display2 = true
+            display3 = false
+            window.scrollTo(0, 999)
+            
+        };
+    
+        if (scroll > 1000 && scroll <= 1500) {
+            if (!window.location.pathname.includes('recomendaciones')) {
+                clearInterval(myTimer)
+                return
+            }
+            if (display3) return
+            console.log('Entraste en el coment' + scroll)
+            clearInterval(myTimer)
+            counter = 0
+            myTimer = setInterval(changer, 1000);
+            comentario_3()
+            display1 = false
+            display2 = false
+            display3 = true
+            window.scrollTo(0, 1499)
+        };
+
+        if (scroll > 1500) {
+            window.scrollTo(0, 0)
+        };
+    
+    };
+
+    let manejoViewportMobile = () => {
+
+                 
+        var scroll = $(window).scrollTop();
+        console.log(scroll);
+        if (scroll <= 170) {
             clearInterval(myTimer)
             counter = 0
             myTimer = setInterval(changer, 1000);
@@ -942,7 +1029,7 @@ function recomendacionesLogica() {
             
         };
         
-        if (scroll >= 100) {
+        if (scroll > 50 && scroll <= 100) {
             clearInterval(myTimer)
             counter = 0
             myTimer = setInterval(changer, 1000);
@@ -953,7 +1040,7 @@ function recomendacionesLogica() {
             
         };
     
-        if (scroll >= 200) {
+        if (scroll > 100 && scroll <= 150) {
             clearInterval(myTimer)
             counter = 0
             myTimer = setInterval(changer, 1000);
@@ -962,12 +1049,26 @@ function recomendacionesLogica() {
             display2 = false
             display3 = true
         };
+
+        if (scroll > 200) {
+            if (!window.location.pathname.includes('recomendaciones')) {
+                clearInterval(myTimer)
+                return
+            }
+            window.scrollTo(0, 0)
+        };
     
     };
     
-    manejoViewport = debounce(manejoViewport, 300)
+    manejoViewport = debounce(manejoViewport, 50)
+    manejoViewportMobile = debounce(manejoViewportMobile, 75)
+
+    if (!window.mobileCheck()) {
+        window.addEventListener('scroll', manejoViewport)
+    } else {
+        window.addEventListener('touchmove', manejoViewportMobile)
+    }
     
-    window.addEventListener('scroll', manejoViewport)
 
 }
 

@@ -65,6 +65,7 @@ HEADER
 }
 
 .logo-container {
+    transition: opacity .5s cubic-bezier(0.13, 0.77, 0.33, 1);
     position: absolute;
     bottom: -.8125rem;
     display: flex;
@@ -174,6 +175,12 @@ FOOTER
     transition: opacity 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
     justify-content: center;
 
+}
+
+.nav-a:hover, .social-icon:hover {
+    transition: opacity 0.4s cubic-bezier(0.77,0.2,0.05,1.0), color 0.7s cubic-bezier(0.77,0.2,0.05,1.0);
+    color: #FDB90D;
+    opacity: .6;
 }
 
 .bottom-lines__dashed-recos.fade-in {
@@ -359,7 +366,7 @@ FIRST LOADER
         justify-content: center;
         position: fixed;
         bottom: 2rem;
-        z-index: 9999;
+        z-index: 99999;
     }
      
      #menuToggle
@@ -483,7 +490,12 @@ FIRST LOADER
        line-height: 1;
        font-weight: 400;
        color: white;
-       text-shadow: 0px 0px 5px rgba(0,0,0,0.85);
+     }
+
+     .nav-a {
+        background-color: rgba(0, 0, 0, .7);
+        padding: 0 4px;
+        border: 4px;
      }
      
      #menuToggle input:checked ~ ul
