@@ -21,6 +21,7 @@ GENERAL
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-display:swap
 }
 
 body {
@@ -170,11 +171,11 @@ TRANSICIONES
     z-index: 88888;
 }
 
-.inspiracion-transition { background-image: url("../imgs/inspiracion.png"); }
+.inspiracion-transition { background-image: url("../imgs/inspiracion-alt.jpg"); }
 
-.contacto-transition{ background-image: url("../imgs/contact-bg.png"); }
+.contacto-transition{ background-image: url("../imgs/contacto-bg-alt.jpg"); }
 
-.recos-transition { background-image: url("../imgs/recos-bg.png"); }
+.recos-transition { background-image: url("../imgs/recos-bg-alt.jpg"); }
 
 .cortina {
     position: fixed;

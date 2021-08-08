@@ -13,6 +13,7 @@
     max-width: 68ch;
     background-color: rgba(0, 0, 0, .2);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     padding: 2rem 4rem;
     position: relative;
     overflow: hidden;
@@ -99,6 +100,23 @@ ANIMS
 
 
 @media (max-width: 799px) {
+    html {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+
+            -webkit-touch-callout: none; /* iOS Safari */
+              -webkit-user-select: none; /* Safari */
+               -khtml-user-select: none; /* Konqueror HTML */
+                 -moz-user-select: none; /* Old versions of Firefox */
+                  -ms-user-select: none; /* Internet Explorer/Edge */
+                      user-select: none; /* Non-prefixed version, currently
+                                            supported by Chrome, Edge, Opera and Firefox */
+    }
+
+    html::-webkit-scrollbar {
+        display: none;
+    }
+
     .reco-texts__container {
         width: 90%;
         padding: 2rem 2rem;
@@ -118,4 +136,14 @@ ANIMS
     .reco-texts__container.fade-in {
         transform: translateY(-50%);
     }
+
+    .no-select {
+        -webkit-touch-callout: none; /* iOS Safari */
+          -webkit-user-select: none; /* Safari */
+           -khtml-user-select: none; /* Konqueror HTML */
+             -moz-user-select: none; /* Old versions of Firefox */
+              -ms-user-select: none; /* Internet Explorer/Edge */
+                  user-select: none; /* Non-prefixed version, currently
+                                        supported by Chrome, Edge, Opera and Firefox */
+      }
 }

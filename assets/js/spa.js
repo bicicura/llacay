@@ -788,88 +788,6 @@ function recomendacionesLogica() {
             comentario_1 ()
         }
     }
-    
-
-
-//  ==============================================
-//  Acá arrancan la declaracion de cada comentario
-//  ==============================================
-    
-    function comentario_1 (){ 
-        if (!window.location.pathname.includes("recomendaciones")) {
-            clearTimeout(myTimer)
-            return
-        }
-
-        if (display1) return
-        else {
-            $('.bottom-lines__dashed_3').removeClass('fade-in')
-            $('.bottom-lines__dashed_2').removeClass('fade-in')
-            $('.bottom-lines__dashed_1').addClass('fade-in')
-            if (window.mobileCheck()) {
-                el.style.height = '30.5rem'
-                } 
-            else {
-                
-                el.style.height = '21.875rem'
-                }
-        return [el2.innerHTML = `<div class="reco-texts__1">
-            <p>Este pequeño presente tiene como objetivo agradecerles todo lo que hicieron (y aún siguen haciendo) por nuestro proyecto.</p>
-            <p>Sinceramente desde la primera reunión y hasta ahora sentimos que todo lo que hicimos asociado a la casa ha sido espectacular, hemos “vivido” el proyecto de la forma en que los soñamos como un verdadero proyecto de vida. Y en ese sentimiento tienen mucho que ver ustedes y la forma en que trabajan.</p>
-            <p>De nuevo, Muchas gracias!!!</p>
-            <span><b>Juan José Sobrino</b></span>
-            <div class="reco-texts__line"></div>
-            </div>`, display1 = true, display3 = false, display2 = false]
-    }
-    }
-    
-    function comentario_2() {
-        if (!window.location.pathname.includes("recomendaciones")) {
-            clearTimeout(myTimer)
-            return
-        }
-
-        if (display2) return
-        else {
-            $('.bottom-lines__dashed_1').removeClass('fade-in')
-            $('.bottom-lines__dashed_3').removeClass('fade-in')
-            $('.bottom-lines__dashed_2').addClass('fade-in')
-            if (window.mobileCheck()) {
-                el.style.height = '16.2rem'
-              } 
-            else {
-                el.style.height = '11.25rem'
-             }
-        return [el2.innerHTML = `<div class="reco-texts__2">
-            <p>Contratamos a Llacay Arquitectos para desarrollar el proyecto de nuestra casa. Quedamos plenamente satisfechos con el proceso y resultado. Lo recomendamos fuertemente a nuestros amigos...</p>
-            <span><b>Marcelo Queijo</b></span>
-            <div class="reco-texts__line"></div>
-            </div>`, display1 = false, display3 = false, display2 = true]
-        }
-    }
-    
-    function comentario_3() {
-        if (!window.location.pathname.includes("recomendaciones")) {
-            clearTimeout(myTimer)
-            return
-        }
-
-        if (display3) return
-        else {
-            $('.bottom-lines__dashed_1').removeClass('fade-in')
-            $('.bottom-lines__dashed_2').removeClass('fade-in')
-            $('.bottom-lines__dashed_3').addClass('fade-in')
-            if (window.mobileCheck()) {
-                el.style.height = '17.5rem'
-              } 
-            else {
-                el.style.height = '12.75rem'
-            }
-        return [el2.innerHTML = `<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ea aperiam, nisi necessitatibus, non, possimus molestiae nihil rerum iure quaerat sed ipsam quam ad sit harum atque iusto. Dolores, consectetur!</p>
-            <span><b>Ipsum Dolor</b></span><div class="reco-texts__line"></div>`, display3, display1 = false, display2 = false]
-        }
-    }
-
 
     //  ==============================================================
     //  changer() hace que cuando la var counter llegue a 14, 
@@ -897,21 +815,132 @@ function recomendacionesLogica() {
     
     var myTimer = setInterval(changer, 1000);
     
-    // Se para el timer y la barra de progreso en mouse over
-    el.addEventListener("mouseover", function(){
-        intervalManager(false)
-        clearInterval(myTimer)
-        let lineaTimer = document.querySelector('.reco-texts__line')
-        lineaTimer.classList.add('pause')
-    }); 
+
+
+//  ==============================================
+//  Acá arrancan la declaracion de cada comentario
+//  ==============================================
     
-    // Se reanuda la barra y timer en mouse out 
-    el.addEventListener("mouseout", function(){
+    function comentario_1 (){ 
+        if (!window.location.pathname.includes("recomendaciones")) {
+            clearTimeout(myTimer)
+            return
+        }
+
+        if (display1) return
+        else {
+            $('.bottom-lines__dashed_3').removeClass('fade-in')
+            $('.bottom-lines__dashed_2').removeClass('fade-in')
+            $('.bottom-lines__dashed_1').addClass('fade-in')
+            if (window.mobileCheck()) {
+                el.style.height = '30.5rem'
+                window.scrollTo(0, 169)
+                } 
+            else {
+                window.scrollTo(0, 499)
+                el.style.height = '21.875rem'
+                }
+        return [el2.innerHTML = `<div class="reco-texts__1">
+            <p class="no-select">Este pequeño presente tiene como objetivo agradecerles todo lo que hicieron (y aún siguen haciendo) por nuestro proyecto.</p>
+            <p class="no-select">Sinceramente desde la primera reunión y hasta ahora sentimos que todo lo que hicimos asociado a la casa ha sido espectacular, hemos “vivido” el proyecto de la forma en que los soñamos como un verdadero proyecto de vida. Y en ese sentimiento tienen mucho que ver ustedes y la forma en que trabajan.</p>
+            <p class="no-select">De nuevo, Muchas gracias!!!</p>
+            <span class="no-select"><b>Juan José Sobrino</b></span>
+            <div class="reco-texts__line"></div>
+            </div>`, display1 = true, display3 = false, display2 = false]
+    }
+    }
+    
+    function comentario_2() {
+        if (!window.location.pathname.includes("recomendaciones")) {
+            clearTimeout(myTimer)
+            return
+        }
+
+        if (display2) return
+        else {
+            $('.bottom-lines__dashed_1').removeClass('fade-in')
+            $('.bottom-lines__dashed_3').removeClass('fade-in')
+            $('.bottom-lines__dashed_2').addClass('fade-in')
+            if (window.mobileCheck()) {
+                el.style.height = '16.2rem'
+                window.scrollTo(0, 270)
+              } 
+            else {
+                el.style.height = '11.25rem'
+                window.scrollTo(0, 999)
+             }
+        return [el2.innerHTML = `<div class="reco-texts__2">
+            <p class="no-select">Contratamos a Llacay Arquitectos para desarrollar el proyecto de nuestra casa. Quedamos plenamente satisfechos con el proceso y resultado. Lo recomendamos fuertemente a nuestros amigos...</p>
+            <span class="no-select"><b>Marcelo Queijo</b></span>
+            <div class="reco-texts__line"></div>
+            </div>`, display1 = false, display3 = false, display2 = true]
+        }
+    }
+    
+    function comentario_3() {
+        if (!window.location.pathname.includes("recomendaciones")) {
+            clearTimeout(myTimer)
+            return
+        }
+
+        if (display3) return
+        else {
+            $('.bottom-lines__dashed_1').removeClass('fade-in')
+            $('.bottom-lines__dashed_2').removeClass('fade-in')
+            $('.bottom-lines__dashed_3').addClass('fade-in')
+            if (window.mobileCheck()) {
+                el.style.height = '17.5rem'
+                window.scrollTo(0, 369)
+              } 
+            else {
+                el.style.height = '12.75rem'
+                window.scrollTo(0, 1499)
+            }
+        return [el2.innerHTML = `<p class="no-select">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ea aperiam, nisi necessitatibus, non, possimus molestiae nihil rerum iure quaerat sed ipsam quam ad sit harum atque iusto. Dolores, consectetur!</p>
+            <span class="no-select"><b>Ipsum Dolor</b></span><div class="reco-texts__line"></div>`, display3 = true, display1 = false, display2 = false]
+        }
+    }
+
+    //  ============================================
+    //  Pausar o reanudar comentario actual en hover
+    //  ============================================
+
+        // Se para el timer y la barra de progreso en mouse over
+        function pausarEnHover() {
+            intervalManager(false)
+            clearInterval(myTimer)
+            let lineaTimer = document.querySelector('.reco-texts__line')
+            lineaTimer.classList.add('pause')
+        }
+
+    function reanudarEnHoverOut() {
         myTimer = setInterval(changer, 1000);
         let lineaTimer = document.querySelector('.reco-texts__line')
         lineaTimer.classList.remove('pause')
-    });
-    
+    }
+
+    if (!window.mobileCheck()) {
+        el.addEventListener("mouseover", function(){
+            pausarEnHover()
+        });
+
+        el.addEventListener("mouseout", function(){
+            reanudarEnHoverOut()
+        });
+
+    } else {
+        el.addEventListener("touchstart", function(){
+            pausarEnHover()
+        });
+
+        el.addEventListener("ontouchmove", function(){
+            pausarEnHover()
+        });
+
+        el.addEventListener("touchend", function(){
+            reanudarEnHoverOut()
+        });
+    }
     
     
     //  ====================================================
@@ -922,7 +951,7 @@ function recomendacionesLogica() {
     
 
     //  ============================================================
-    //  Para que no se llame muchas veces al pepe a manejoViewport()
+    //  Para que no se llame muchas veces al pedo a manejoViewport()
     //  ============================================================
     
     const debounce = (fn, delay) => {
@@ -935,7 +964,6 @@ function recomendacionesLogica() {
         }
     }
     
-    window.scrollTo(0, 499)
     
     //  ==================================
     //  Cambio de comentario con el scroll
@@ -966,7 +994,7 @@ function recomendacionesLogica() {
             display1 = true
             display2 = false
             display3 = false
-            window.scrollTo(0, 499)
+            
             
             
         };
@@ -985,7 +1013,7 @@ function recomendacionesLogica() {
             display1 = false
             display2 = true
             display3 = false
-            window.scrollTo(0, 999)
+
             
         };
     
@@ -1003,21 +1031,27 @@ function recomendacionesLogica() {
             display1 = false
             display2 = false
             display3 = true
-            window.scrollTo(0, 1499)
+            
         };
 
         if (scroll > 1500) {
+            clearInterval(myTimer)
             window.scrollTo(0, 0)
         };
     
     };
 
     let manejoViewportMobile = () => {
+        if (!window.location.pathname.includes('recomendaciones')) {
+            clearInterval(myTimer)
+            return
+        }
+        // clearInterval(myTimer)
 
-                 
         var scroll = $(window).scrollTop();
         console.log(scroll);
         if (scroll <= 170) {
+            if (display1) return
             clearInterval(myTimer)
             counter = 0
             myTimer = setInterval(changer, 1000);
@@ -1029,7 +1063,8 @@ function recomendacionesLogica() {
             
         };
         
-        if (scroll > 50 && scroll <= 100) {
+        if (scroll > 170 && scroll <= 270) {
+            if (display2) return
             clearInterval(myTimer)
             counter = 0
             myTimer = setInterval(changer, 1000);
@@ -1040,7 +1075,8 @@ function recomendacionesLogica() {
             
         };
     
-        if (scroll > 100 && scroll <= 150) {
+        if (scroll > 270 && scroll <= 370) {
+            if (display3) return
             clearInterval(myTimer)
             counter = 0
             myTimer = setInterval(changer, 1000);
@@ -1050,25 +1086,31 @@ function recomendacionesLogica() {
             display3 = true
         };
 
-        if (scroll > 200) {
+        if (scroll > 370) {
             if (!window.location.pathname.includes('recomendaciones')) {
                 clearInterval(myTimer)
                 return
             }
-            window.scrollTo(0, 0)
+            clearInterval(myTimer)
+            counter = 0
+            myTimer = setInterval(changer, 1000);
+            comentario_1()
+            display1 = false
+            display2 = false
+            display3 = false
+            // window.scrollTo(0, 169)
         };
     
     };
     
     manejoViewport = debounce(manejoViewport, 50)
-    manejoViewportMobile = debounce(manejoViewportMobile, 75)
+    manejoViewportMobile = debounce(manejoViewportMobile, 25)
 
     if (!window.mobileCheck()) {
         window.addEventListener('scroll', manejoViewport)
     } else {
         window.addEventListener('touchmove', manejoViewportMobile)
     }
-    
 
 }
 
