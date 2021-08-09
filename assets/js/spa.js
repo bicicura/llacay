@@ -834,10 +834,10 @@ function recomendacionesLogica() {
             $('.bottom-lines__dashed_1').addClass('fade-in')
             if (window.mobileCheck()) {
                 el.style.height = '30.5rem'
-                window.scrollTo(0, 169)
+                // window.scrollTo(0, 169)
                 } 
             else {
-                window.scrollTo(0, 499)
+                // window.scrollTo(0, 499)
                 el.style.height = '21.875rem'
                 }
         return [el2.innerHTML = `<div class="reco-texts__1">
@@ -863,11 +863,11 @@ function recomendacionesLogica() {
             $('.bottom-lines__dashed_2').addClass('fade-in')
             if (window.mobileCheck()) {
                 el.style.height = '16.2rem'
-                window.scrollTo(0, 270)
+                // window.scrollTo(0, 270)
               } 
             else {
                 el.style.height = '11.25rem'
-                window.scrollTo(0, 999)
+                // window.scrollTo(0, 999)
              }
         return [el2.innerHTML = `<div class="reco-texts__2">
             <p class="no-select">Contratamos a Llacay Arquitectos para desarrollar el proyecto de nuestra casa. Quedamos plenamente satisfechos con el proceso y resultado. Lo recomendamos fuertemente a nuestros amigos...</p>
@@ -890,11 +890,11 @@ function recomendacionesLogica() {
             $('.bottom-lines__dashed_3').addClass('fade-in')
             if (window.mobileCheck()) {
                 el.style.height = '17.5rem'
-                window.scrollTo(0, 369)
+                // window.scrollTo(0, 369)
               } 
             else {
                 el.style.height = '12.75rem'
-                window.scrollTo(0, 1499)
+                // window.scrollTo(0, 1499)
             }
         return [el2.innerHTML = `<p class="no-select">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ea aperiam, nisi necessitatibus, non, possimus molestiae nihil rerum iure quaerat sed ipsam quam ad sit harum atque iusto. Dolores, consectetur!</p>
             <span class="no-select"><b>Ipsum Dolor</b></span><div class="reco-texts__line"></div>`, display3 = true, display1 = false, display2 = false]
@@ -954,16 +954,33 @@ function recomendacionesLogica() {
     //  Para que no se llame muchas veces al pedo a manejoViewport()
     //  ============================================================
     
-    const debounce = (fn, delay) => {
-        let timer
-        return function(){
-            clearTimeout(timer)
-             timer = setTimeout(() => {
-                fn()
-            }, delay)
+    // const debounce = (fn, delay) => {
+    //     let timer
+    //     return function(){
+    //         clearTimeout(timer)
+    //          timer = setTimeout(() => {
+    //             fn()
+    //         }, delay)
+    //     }
+    // }
+
+    function throttle (callback, limit) {
+        var waiting = false;                      // Initially, we're not waiting
+        return function () {                      // We return a throttled function
+            if (!waiting) {                       // If we're not waiting
+                callback.apply(this, arguments);  // Execute users function
+                waiting = true;                   // Prevent future invocations
+                setTimeout(function () {          // After a period of time
+                    waiting = false;              // And allow future invocations
+                }, limit);
+            }
         }
     }
     
+    function prueba() {
+        cada15sCambio()
+        counter = 0
+    }
     
     //  ==================================
     //  Cambio de comentario con el scroll
@@ -974,71 +991,9 @@ function recomendacionesLogica() {
             clearInterval(myTimer)
             return
         }
-
-        console.log('escroleaste')
-
-                 
-        var scroll = $(window).scrollTop();
-        console.log(scroll);
-        if (scroll <= 500) {
-            if (!window.location.pathname.includes('recomendaciones')) {
-                clearInterval(myTimer)
-                return
-            }
-            if (display1) return
-            console.log('Entraste en el coment' + scroll)
-            clearInterval(myTimer)
-            counter = 0
-            myTimer = setInterval(changer, 1000);
-            comentario_1()
-            display1 = true
-            display2 = false
-            display3 = false
-            
-            
-            
-        };
-        
-        if (scroll > 500 && scroll <= 1000) {
-            if (!window.location.pathname.includes('recomendaciones')) {
-                clearInterval(myTimer)
-                return
-            }
-            if (display2) return
-            console.log('Entraste en el coment' + scroll)
-            clearInterval(myTimer)
-            counter = 0
-            myTimer = setInterval(changer, 1000);
-            comentario_2()
-            display1 = false
-            display2 = true
-            display3 = false
-
-            
-        };
     
-        if (scroll > 1000 && scroll <= 1500) {
-            if (!window.location.pathname.includes('recomendaciones')) {
-                clearInterval(myTimer)
-                return
-            }
-            if (display3) return
-            console.log('Entraste en el coment' + scroll)
-            clearInterval(myTimer)
-            counter = 0
-            myTimer = setInterval(changer, 1000);
-            comentario_3()
-            display1 = false
-            display2 = false
-            display3 = true
-            
-        };
+    throttle(prueba(), 1000)
 
-        if (scroll > 1500) {
-            clearInterval(myTimer)
-            window.scrollTo(0, 0)
-        };
-    
     };
 
     let manejoViewportMobile = () => {
@@ -1046,65 +1001,13 @@ function recomendacionesLogica() {
             clearInterval(myTimer)
             return
         }
-        // clearInterval(myTimer)
-
-        var scroll = $(window).scrollTop();
-        console.log(scroll);
-        if (scroll <= 170) {
-            if (display1) return
-            clearInterval(myTimer)
-            counter = 0
-            myTimer = setInterval(changer, 1000);
-            comentario_1()
-            display1 = true
-            display2 = false
-            display3 = false
-            
-            
-        };
         
-        if (scroll > 170 && scroll <= 270) {
-            if (display2) return
-            clearInterval(myTimer)
-            counter = 0
-            myTimer = setInterval(changer, 1000);
-            comentario_2()
-            display1 = false
-            display2 = true
-            display3 = false
-            
-        };
-    
-        if (scroll > 270 && scroll <= 370) {
-            if (display3) return
-            clearInterval(myTimer)
-            counter = 0
-            myTimer = setInterval(changer, 1000);
-            comentario_3()
-            display1 = false
-            display2 = false
-            display3 = true
-        };
+    throttle(prueba(), 1000)
 
-        if (scroll > 370) {
-            if (!window.location.pathname.includes('recomendaciones')) {
-                clearInterval(myTimer)
-                return
-            }
-            clearInterval(myTimer)
-            counter = 0
-            myTimer = setInterval(changer, 1000);
-            comentario_1()
-            display1 = false
-            display2 = false
-            display3 = false
-            // window.scrollTo(0, 169)
-        };
-    
     };
     
-    manejoViewport = debounce(manejoViewport, 50)
-    manejoViewportMobile = debounce(manejoViewportMobile, 25)
+    manejoViewport = throttle(manejoViewport, 650)
+    manejoViewportMobile = throttle(manejoViewportMobile, 550)
 
     if (!window.mobileCheck()) {
         window.addEventListener('scroll', manejoViewport)
