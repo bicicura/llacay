@@ -202,6 +202,8 @@ window.addEventListener("popstate", ev => {
     checkGaleria()
     checkRecos()
 
+    if (window.location.pathname === "/") {window.location.href="index.html";}
+
     ajax("GET", url, main)
     popStateActiveLink()
 })
@@ -511,6 +513,8 @@ function galeriaColorEnViewport() {
 
 }
 
+
+
 // ======================================
 // MENU MOBILE se cierra al apretar un li 
 // ======================================
@@ -522,11 +526,11 @@ $('.nav-a').click(function(ev) {
     }
 })
 
+
+
 // =======================================
 // Transición de cualquier vista a GALERIA 
 // =======================================
-
-
 
 function galeriaTransitionReset() {
     recosBg.classList.remove('fade-in')
@@ -608,7 +612,6 @@ function recosBottomBarFade() {
         $(".bottom-lines__active").addClass('fade-out')
         $(".bottom-lines__dashed-recos").removeClass('fade-out')
         $(".bottom-lines__dashed-recos").addClass('fade-in')
-    
     }, 1000);  
 
 
@@ -652,8 +655,6 @@ function recosBottomBarFade() {
             }, 1500);
             
     }
-
-    
 }
 
 function checkInspiracion() {
@@ -759,40 +760,103 @@ function recomendacionesLogica() {
 
     let el = document.querySelector('.reco-texts__container')
     let el2 = document.querySelector('.reco-texts__1')
-    let display1 = ''
-    let display2 = ''
-    let display3 = ''
-    let intervalID = null;
+    let display1 = null
+    let display2 = null
+    let display3 = null
+    let scrollUp = null
+    let scrollDown = null
 
-    //  ===========================================================
-    //  Acá arrancan el timer cada 15 segundos cambia el comentario
-    //  ===========================================================
-    
-    function intervalManager(flag, animate, time) {
-       if(flag)
-         intervalID =  setInterval(animate, time);
-       else
-         clearInterval(intervalID);
+    //  ================================================================================
+    //  Para que no se llame muchas veces al pedo a manejoViewport() en el evento scroll
+    //  ================================================================================
+
+    function throttle (callback, limit) {
+        var waiting = false;                      
+        return function () {                      
+            if (!waiting) {                       
+                callback.apply(this, arguments);  
+                waiting = true;                   
+                setTimeout(function () {          
+                    waiting = false;         
+                }, limit);
+            }
+        }
     }
+
+    //  =============================================
+    //  runScrollDown() Cambia los comentarios en el 
+    //  orden correcto cuando se scrollear para abajo 
+    //  o cuando pasan solos, por tiempo
+    //  =============================================
     
-    function cada15sCambio() {
-        if (display1) {
-            console.log('pasaron 15 en reco1')
+    function runScrollDown() {
+        if (display1 || display1 && scrollDown) {
+            // console.log('pasaron 15 en reco1')
             comentario_2 ()
-        } else if (display2) {
-            console.log('pasaron 15 en reco2')
+            return
+        } else if (display2 || display2 && scrollDown) {
+            // console.log('pasaron 15 en reco2')
             comentario_3 ()
+            return
         }
-        else {
-            console.log('pasaron 15 en reco3')
-            comentario_1 ()
+        else if (display3 || display3 && scrollDown) {
+            // console.log('pasaron 15 en reco3')
+            comentario_1()
+            return
         }
     }
+
+    //  =============================================
+    //  runScrollUp() Cambia los comentarios en el 
+    //  orden correcto cuando se scrollear para arriba
+    //  =============================================
+
+    function runScrollUp() {
+        if (display1 && scrollUp) {
+            comentario_3() 
+            return
+        }
+        else if (display3 && scrollUp) {
+            comentario_2()
+            return
+        }
+        else if (display2 && scrollUp) {
+            comentario_1()
+            return
+        }
+    }
+
+    //  =========================================================
+    //  arribaOabajo() llama a la funcion runScrollUp()
+    //  o runScrollDown() segun si se scroleo para arriba o abajo
+    //  =========================================================
+
+    function arribaOabajo() {
+            let lasScrollTop = window.pageYOffset || document.documentElement.scrollTop
+            $(window).one('scroll', function() {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop
+                if (scrollTop > lasScrollTop) {
+                    console.log('fuiste abajo')
+                    scrollUp = false
+                    scrollDown = true
+                    runScrollDown()
+                } else {
+                    console.log('fuiste arriba')
+                    scrollUp = true
+                    scrollDown = false
+                    runScrollUp()
+                }
+                lasScrollTop = scrollTop
+            })
+    }  
+
+
 
     //  ==============================================================
     //  changer() hace que cuando la var counter llegue a 14, 
-    //  se cambia el comentario al llamar a la funcion cada15sCambio()
+    //  se cambia el comentario al llamar a la funcion runScrollDown()
     //  ==============================================================
+    
     var counter = 0;
     
     function changer(){
@@ -803,7 +867,7 @@ function recomendacionesLogica() {
         else {
             if (counter >= 14){
                 console.log('cambia de comentario')
-                cada15sCambio()
+                runScrollDown()
                 counter = 0;
                 };
             
@@ -817,11 +881,11 @@ function recomendacionesLogica() {
     
 
 
-//  ==============================================
-//  Acá arrancan la declaracion de cada comentario
-//  ==============================================
+    //  ==============================================
+    //  Acá arrancan la declaracion de cada comentario
+    //  ==============================================
     
-    function comentario_1 (){ 
+    function comentario_1() {
         if (!window.location.pathname.includes("recomendaciones")) {
             clearTimeout(myTimer)
             return
@@ -833,11 +897,34 @@ function recomendacionesLogica() {
             $('.bottom-lines__dashed_2').removeClass('fade-in')
             $('.bottom-lines__dashed_1').addClass('fade-in')
             if (window.mobileCheck()) {
+                el.style.height = '16.2rem'
+              } 
+            else {
+                el.style.height = '11.25rem'
+             }
+        return [el2.innerHTML = `<div class="reco-texts__2">
+            <p class="no-select">Contratamos a Llacay Arquitectos para desarrollar el proyecto de nuestra casa. Quedamos plenamente satisfechos con el proceso y resultado. Lo recomendamos fuertemente a nuestros amigos...</p>
+            <span class="no-select"><b>Marcelo Queijo</b></span>
+            <div class="reco-texts__line"></div>
+            </div>`, display1 = true, display3 = false, display2 = false]
+        }
+    }
+
+    function comentario_2 (){ 
+        if (!window.location.pathname.includes("recomendaciones")) {
+            clearTimeout(myTimer)
+            return
+        }
+
+        if (display2) return
+        else {
+            $('.bottom-lines__dashed_3').removeClass('fade-in')
+            $('.bottom-lines__dashed_1').removeClass('fade-in')
+            $('.bottom-lines__dashed_2').addClass('fade-in')
+            if (window.mobileCheck()) {
                 el.style.height = '30.5rem'
-                // window.scrollTo(0, 169)
                 } 
             else {
-                // window.scrollTo(0, 499)
                 el.style.height = '21.875rem'
                 }
         return [el2.innerHTML = `<div class="reco-texts__1">
@@ -846,35 +933,8 @@ function recomendacionesLogica() {
             <p class="no-select">De nuevo, Muchas gracias!!!</p>
             <span class="no-select"><b>Juan José Sobrino</b></span>
             <div class="reco-texts__line"></div>
-            </div>`, display1 = true, display3 = false, display2 = false]
+            </div>`, display2 = true, display3 = false, display1 = false]
     }
-    }
-    
-    function comentario_2() {
-        if (!window.location.pathname.includes("recomendaciones")) {
-            clearTimeout(myTimer)
-            return
-        }
-
-        if (display2) return
-        else {
-            $('.bottom-lines__dashed_1').removeClass('fade-in')
-            $('.bottom-lines__dashed_3').removeClass('fade-in')
-            $('.bottom-lines__dashed_2').addClass('fade-in')
-            if (window.mobileCheck()) {
-                el.style.height = '16.2rem'
-                // window.scrollTo(0, 270)
-              } 
-            else {
-                el.style.height = '11.25rem'
-                // window.scrollTo(0, 999)
-             }
-        return [el2.innerHTML = `<div class="reco-texts__2">
-            <p class="no-select">Contratamos a Llacay Arquitectos para desarrollar el proyecto de nuestra casa. Quedamos plenamente satisfechos con el proceso y resultado. Lo recomendamos fuertemente a nuestros amigos...</p>
-            <span class="no-select"><b>Marcelo Queijo</b></span>
-            <div class="reco-texts__line"></div>
-            </div>`, display1 = false, display3 = false, display2 = true]
-        }
     }
     
     function comentario_3() {
@@ -890,11 +950,9 @@ function recomendacionesLogica() {
             $('.bottom-lines__dashed_3').addClass('fade-in')
             if (window.mobileCheck()) {
                 el.style.height = '17.5rem'
-                // window.scrollTo(0, 369)
               } 
             else {
                 el.style.height = '12.75rem'
-                // window.scrollTo(0, 1499)
             }
         return [el2.innerHTML = `<p class="no-select">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ea aperiam, nisi necessitatibus, non, possimus molestiae nihil rerum iure quaerat sed ipsam quam ad sit harum atque iusto. Dolores, consectetur!</p>
             <span class="no-select"><b>Ipsum Dolor</b></span><div class="reco-texts__line"></div>`, display3 = true, display1 = false, display2 = false]
@@ -905,13 +963,11 @@ function recomendacionesLogica() {
     //  Pausar o reanudar comentario actual en hover
     //  ============================================
 
-        // Se para el timer y la barra de progreso en mouse over
-        function pausarEnHover() {
-            intervalManager(false)
-            clearInterval(myTimer)
-            let lineaTimer = document.querySelector('.reco-texts__line')
-            lineaTimer.classList.add('pause')
-        }
+    function pausarEnHover() {
+        clearInterval(myTimer)
+        let lineaTimer = document.querySelector('.reco-texts__line')
+        lineaTimer.classList.add('pause')
+    }
 
     function reanudarEnHoverOut() {
         myTimer = setInterval(changer, 1000);
@@ -920,6 +976,7 @@ function recomendacionesLogica() {
     }
 
     if (!window.mobileCheck()) {
+        // VERSION DESKTOP
         el.addEventListener("mouseover", function(){
             pausarEnHover()
         });
@@ -929,62 +986,47 @@ function recomendacionesLogica() {
         });
 
     } else {
-        el.addEventListener("touchstart", function(){
+        // VERSION MOBILE
+        el.addEventListener("touchstart", function(ev){
+            ev.stopPropagation()
             pausarEnHover()
         });
 
-        el.addEventListener("ontouchmove", function(){
+        el.addEventListener("ontouchmove", function(ev){
+            ev.stopPropagation()
             pausarEnHover()
         });
 
-        el.addEventListener("touchend", function(){
+        el.addEventListener("touchend", function(ev){
+            ev.stopPropagation()
             reanudarEnHoverOut()
         });
     }
     
     
-    //  ====================================================
-    //  Cuando se carga la vista, carga el primer comentario
-    //  ====================================================
+    //  ==========================================================
+    //  Cuando se carga la vista RECOS, carga el primer comentario
+    //  ==========================================================
+
     comentario_1()
     display1 = true
-    
+        
 
-    //  ============================================================
-    //  Para que no se llame muchas veces al pedo a manejoViewport()
-    //  ============================================================
-    
-    // const debounce = (fn, delay) => {
-    //     let timer
-    //     return function(){
-    //         clearTimeout(timer)
-    //          timer = setTimeout(() => {
-    //             fn()
-    //         }, delay)
-    //     }
-    // }
 
-    function throttle (callback, limit) {
-        var waiting = false;                      // Initially, we're not waiting
-        return function () {                      // We return a throttled function
-            if (!waiting) {                       // If we're not waiting
-                callback.apply(this, arguments);  // Execute users function
-                waiting = true;                   // Prevent future invocations
-                setTimeout(function () {          // After a period of time
-                    waiting = false;              // And allow future invocations
-                }, limit);
-            }
-        }
-    }
-    
+    //  ========================================
+    //  llama a arribaOabajo() y setea counter 0 
+    //  ========================================
+
     function prueba() {
-        cada15sCambio()
+        arribaOabajo()
         counter = 0
     }
     
-    //  ==================================
-    //  Cambio de comentario con el scroll
-    //  ==================================
+
+
+    //  ==============================================
+    //  Cambio de comentario con el scroll de viewport
+    //  ==============================================
     
     let manejoViewport = () => {
         if (!window.location.pathname.includes('recomendaciones')) {
@@ -1002,18 +1044,46 @@ function recomendacionesLogica() {
             return
         }
         
-    throttle(prueba(), 1000)
+    throttle(prueba(), 200)
 
     };
+
+
+
+    //  ==========================================================================================
+    //  El uso de throttle previene que se llame muchas veces el cambio de comentario en el scroll
+    //  ==========================================================================================
+
+    let centreDiv = document.querySelector('.center-title__container')
     
     manejoViewport = throttle(manejoViewport, 650)
-    manejoViewportMobile = throttle(manejoViewportMobile, 550)
+    manejoViewportMobile = throttle(manejoViewportMobile, 300)
 
     if (!window.mobileCheck()) {
         window.addEventListener('scroll', manejoViewport)
     } else {
-        window.addEventListener('touchmove', manejoViewportMobile)
+        centreDiv.addEventListener('touchmove', function(ev) {
+            // esto es para que no se pueda cambiar de coment mientras se esta apretando la caja del comentario, tienen el mismo evento!
+            if( ev.target !== this ) {
+                return;
+         }
+         manejoViewportMobile()
+        })
     }
+
+    //  ========================================================================================
+    //  cuando llegas al fondo de la pagina, te scrollea a la mitad, asi el scroll es "infinito"
+    //  ========================================================================================
+
+    window.onscroll = function(ev) {
+        if (!window.location.pathname.includes('recomendaciones')) {
+            return
+        } else {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            window.scrollTo(0, 600)
+        }
+        }
+    };
 
 }
 

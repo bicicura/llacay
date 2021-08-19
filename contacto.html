@@ -19,23 +19,23 @@
 
                     <h2 class="contact-title">Contactános</h2>
 
-                    <form class="contact-form flex col" action="">
+                    <form class="contact-form flex col" action="webform.php" method="post">
             
                         <div class="contact-input__cont">
                             <label class="tags" for="nuevoUser">Nombre y apellido</label>
-                            <input class="contact-input inputes" id="nuevoUser" type="text" name="name">
+                            <input class="contact-input inputes" id="nuevoUser" type="text" name="name" required>
                         </div>
 
                         <div class="contact-input__cont">
                             <label class="tags" for="nuevoTel">Número de teléfono</label>
-                            <input class="contact-input inputes" id="nuevoTel" type="tel" name="tel">
+                            <input class="contact-input inputes" id="nuevoTel" type="tel" name="phone" required>
                         </div>
 
                         <div class="contact-input__cont" id="contact-input-container">
                             <label class="tags" for="nuevoText">Mensaje</label>
-                            <input class="contact-input inputes" id="nuevoText" type="email" name="mail">
+                            <input class="contact-input inputes" id="nuevoText" type="email" name="message" required>
                         </div>
-                            <div class="contact-btn__container"><button>Envíar consulta</button></div>
+                            <div class="contact-btn__container"><button type="submit">Envíar consulta</button></div>
                         </div>
                     </form>
                 </div>
