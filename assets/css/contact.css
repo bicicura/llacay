@@ -70,6 +70,16 @@ CONTACT CONTAINER
     margin-left: 1.2rem;
 }
 
+.social-icon {
+    max-width: 1.25rem;
+    max-height: 1.25rem;
+}
+
+.social-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
 /* 
 ====
 FORM
@@ -111,7 +121,6 @@ FORM
 .contact-socialicon__container {
     margin-top: 3rem;
 }
-
 
 
 /* 

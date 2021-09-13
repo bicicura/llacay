@@ -40,7 +40,7 @@ body {
     top: 0;
     bottom: 0;
     margin: auto;
-    max-width: 30%;
+    max-width: 32%;
     opacity: 0;
     transform: translateY(50%);
 }
@@ -74,6 +74,13 @@ body {
 
 .flecha {
     animation: float 5s ease-in-out forwards infinite;
+}
+
+.insp-img {
+    min-width: 50px;
+    min-height: 50px;
+    opacity: 0;
+    transition: opacity .5s cubic-bezier(0.13, 0.77, 0.33, 1);
 }
 
 @keyframes float {

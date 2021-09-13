@@ -65,12 +65,15 @@ HEADER
 }
 
 .logo-container {
-    transition: opacity .5s cubic-bezier(0.13, 0.77, 0.33, 1);
-    position: absolute;
-    bottom: -.8125rem;
     display: flex;
     align-items: baseline;
+    margin: 0 auto;
+    position: absolute;
     width: max-content;
+    bottom: -.8125rem;
+    left: 0;
+    right: 0;
+    transition: opacity .5s cubic-bezier(0.13, 0.77, 0.33, 1);
 }
 
 .logo { 
@@ -85,6 +88,17 @@ HEADER
 .logo-text {
     margin-bottom: 0;
     letter-spacing: .4rem;
+    font-family: var(--ff-accent);
+}
+
+.logo-slogan {
+    position: absolute;
+    width: max-content;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    bottom: -2rem;
+    pointer-events: none;
     font-family: var(--ff-accent);
 }
 
@@ -194,9 +208,19 @@ FOOTER
     transition-delay: 0s;
 }
 
-.bottom-lines__dashed_1, .bottom-lines__dashed_2, .bottom-lines__dashed_3  {
-    width: 8rem;
-    height: 3px;
+.bottom-lines__dashed_1, 
+.bottom-lines__dashed_2, 
+.bottom-lines__dashed_3, 
+.bottom-lines__dashed_4, 
+.bottom-lines__dashed_5,
+.bottom-lines__dashed_6,
+.bottom-lines__dashed_7,
+.bottom-lines__dashed_8,
+.bottom-lines__dashed_9,
+.bottom-lines__dashed_10,
+.bottom-lines__dashed_11  {
+    width: 7rem;
+    height: 2px;
     background-color: white;
     opacity: .3;
     transition: opacity 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
@@ -216,13 +240,21 @@ FOOTER
 .bottom-lines__active.fade-in,
 .bottom-lines__dashed_1.fade-in,
 .bottom-lines__dashed_2.fade-in,
-.bottom-lines__dashed_3.fade-in {
+.bottom-lines__dashed_3.fade-in,
+.bottom-lines__dashed_4.fade-in,
+.bottom-lines__dashed_5.fade-in,
+.bottom-lines__dashed_6.fade-in,
+.bottom-lines__dashed_7.fade-in,
+.bottom-lines__dashed_8.fade-in,
+.bottom-lines__dashed_9.fade-in,
+.bottom-lines__dashed_10.fade-in,
+.bottom-lines__dashed_11.fade-in {
     opacity: 1;
     transition: opacity 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
 }
 
-.bottom-lines__dashed_2 {
-    margin: 0 2rem;
+.dashed + .dashed {
+    margin-left: 1rem;
 }
 
 /* 
@@ -334,7 +366,7 @@ FIRST LOADER
         left: 0;
         bottom: 2rem;
         margin: 0 auto;
-        max-width: max-content;
+        max-width: 100%;
     }
 
     .top-lines__left, .top-lines__right {
@@ -518,8 +550,17 @@ FIRST LOADER
 }
 
 @media (max-width: 799px) {
+    .bottom-lines__dashed-recos {
+        width: 100%;
+    }
+
     .bottom-lines__active {
         width: 4rem;
         left: 4rem;
+    }
+
+
+    .dashed + .dashed {
+        margin-left: .5rem;
     }
 }

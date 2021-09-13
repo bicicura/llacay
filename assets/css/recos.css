@@ -38,7 +38,7 @@
 }
 
 .main-container, .reco-main {
-    height: 400vh;
+    height: 1000vh;
 }
 
 .center-title__container {
@@ -126,11 +126,19 @@ ANIMS
 
     }
 
-    .bottom-lines__dashed_1, 
-    .bottom-lines__dashed_2, 
-    .bottom-lines__dashed_3 {
-        width: 4rem;
-    }
+.bottom-lines__dashed_1, 
+.bottom-lines__dashed_2, 
+.bottom-lines__dashed_3, 
+.bottom-lines__dashed_4, 
+.bottom-lines__dashed_5,
+.bottom-lines__dashed_6,
+.bottom-lines__dashed_7,
+.bottom-lines__dashed_8,
+.bottom-lines__dashed_9,
+.bottom-lines__dashed_10,
+.bottom-lines__dashed_11  {
+    width: 1.6rem;
+}
 
 
     .reco-texts__container.fade-in {

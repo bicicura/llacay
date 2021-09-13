@@ -235,7 +235,8 @@ function menuRestart() {
 
 
 // ============================================
-// rowAppear() aparecen las imagenes de GALERIA 
+// rowAppear() aparecen las imagenes de GALERIA
+// el window.scrollTo(0, 0) es para q en mobile siempre q se entre a galeria vaya al principio tmb 
 // ============================================
 
 function rowAppear() {
@@ -513,6 +514,50 @@ function galeriaColorEnViewport() {
 
 }
 
+function lazyLoading() {
+    const images = document.querySelectorAll("[data-src]")
+
+    function preloadImage(img) {
+        const src = img.getAttribute("data-src")
+        if(!src) {
+            return
+        }
+
+        img.src = src
+    }
+
+    const imgOptions = {
+        threshold:0,
+        margin: "0px 0px -500px 0px"
+    }
+
+    if (window.mobileCheck()) {
+        if (window.location.pathname.includes("inspiracion")) {
+            imgOptions.margin = "0px 0px -500px 0px"
+            console.log(imgOptions.margin)
+        }
+        else if (window.location.pathname.includes("galeria")) {
+            imgOptions.margin = "0px -500px 0px 0px"
+            console.log(imgOptions.margin)
+        }
+    }
+
+    const imgObserver = new IntersectionObserver((entries, imgObserver) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                return
+            } else {
+            preloadImage(entry.target)
+            imgObserver.unobserve(entry.target)
+        }
+        })
+    }, imgOptions)
+
+    images.forEach(image => {
+        imgObserver.observe(image)
+    })
+}
+
 
 
 // ======================================
@@ -622,6 +667,11 @@ function recosBottomBarFade() {
 // Para que carguen los JS de animaciones cuando se actualiza la vista
 // ===================================================================
 
+    function galeriaCentrar() {
+        let galeriaConteiner = document.body.querySelector('.gallery-content-container')
+        console.log(galeriaConteiner.offsetLeft)
+    }
+
     function checkGaleria() {
     if (window.location.pathname.includes("galeria")) {
         if (window.mobileCheck()) {
@@ -643,7 +693,9 @@ function recosBottomBarFade() {
                 function () {
                   // the code you want to run here...
                   cortinaFadeOut()
+                  galeriaCentrar()
                   rowAppear()
+                  lazyLoading()
                   galeriaColorEnViewport()
                 },
                 function() {
@@ -671,6 +723,22 @@ function checkInspiracion() {
         recosBgTransitionReset()
         inspiracionBgTransition()
         $('.bottom-lines__active').css({'transform':'translateX(200%)'})
+
+        setTimeout(() => {
+            waitUntil(
+                function () {
+                  // the code you want to run here...
+                  lazyLoading()
+                },
+                function() {
+                  // the code that tests here... (return true if test passes; false otherwise)
+                  return !!(document.getElementById('img-test-inspiracion').innerHTML !== '');
+                },
+                50 // amout to wait between checks
+              )();
+            }, 1500);
+            
+    
     }
 }
 
@@ -763,6 +831,12 @@ function recomendacionesLogica() {
     let display1 = null
     let display2 = null
     let display3 = null
+    let display4 = null
+    let display5 = null
+    let display6 = null
+    let display7 = null
+    let display8 = null
+    let display9 = null
     let scrollUp = null
     let scrollDown = null
 
@@ -801,6 +875,46 @@ function recomendacionesLogica() {
         }
         else if (display3 || display3 && scrollDown) {
             // console.log('pasaron 15 en reco3')
+            comentario_4()
+            return
+        }
+        else if (display4 || display4 && scrollDown) {
+            // console.log('pasaron 15 en reco3')
+            comentario_5()
+            return
+        }
+        else if (display5 || display5 && scrollDown) {
+            // console.log('pasaron 15 en reco3')
+            comentario_6()
+            return
+        }
+        else if (display6 || display6 && scrollDown) {
+            // console.log('pasaron 15 en reco3')
+            comentario_7()
+            return
+        }
+        else if (display7 || display7 && scrollDown) {
+            // console.log('pasaron 15 en reco3')
+            comentario_8()
+            return
+        }
+        else if (display8 || display8 && scrollDown) {
+            // console.log('pasaron 15 en reco3')
+            comentario_9()
+            return
+        }
+        else if (display9 || display9 && scrollDown) {
+            // console.log('pasaron 15 en reco3')
+            comentario_10()
+            return
+        }
+        else if (display10 || display10 && scrollDown) {
+            // console.log('pasaron 15 en reco3')
+            comentario_11()
+            return
+        }
+        else if (display11 || display11 && scrollDown) {
+            // console.log('pasaron 15 en reco3')
             comentario_1()
             return
         }
@@ -813,7 +927,39 @@ function recomendacionesLogica() {
 
     function runScrollUp() {
         if (display1 && scrollUp) {
-            comentario_3() 
+            comentario_11() 
+            return
+        }
+        else if (display11 && scrollUp) {
+            comentario_10() 
+            return
+        }
+        else if (display10 && scrollUp) {
+            comentario_9() 
+            return
+        }
+        else if (display9 && scrollUp) {
+            comentario_8() 
+            return
+        }
+        else if (display8 && scrollUp) {
+            comentario_7() 
+            return
+        }
+        else if (display7 && scrollUp) {
+            comentario_6() 
+            return
+        }
+        else if (display6 && scrollUp) {
+            comentario_5() 
+            return
+        }
+        else if (display5 && scrollUp) {
+            comentario_4()
+            return
+        }
+        else if (display4 && scrollUp) {
+            comentario_3()
             return
         }
         else if (display3 && scrollUp) {
@@ -824,6 +970,7 @@ function recomendacionesLogica() {
             comentario_1()
             return
         }
+        
     }
 
     //  =========================================================
@@ -884,6 +1031,15 @@ function recomendacionesLogica() {
     //  ==============================================
     //  Acá arrancan la declaracion de cada comentario
     //  ==============================================
+
+    // dashRemoveFade le saca la clase fade in a todas las lineas de abajo asi dp se le asigna a la correcta
+    function dashRemoveFade() {
+        let dash = document.querySelector('.bottom-lines__dashed-recos')
+
+        for (let i = 0; i < dash.children.length; i++) {
+            dash.children[i].classList.remove('fade-in')
+        }
+    }
     
     function comentario_1() {
         if (!window.location.pathname.includes("recomendaciones")) {
@@ -893,8 +1049,7 @@ function recomendacionesLogica() {
 
         if (display1) return
         else {
-            $('.bottom-lines__dashed_3').removeClass('fade-in')
-            $('.bottom-lines__dashed_2').removeClass('fade-in')
+            dashRemoveFade()
             $('.bottom-lines__dashed_1').addClass('fade-in')
             if (window.mobileCheck()) {
                 el.style.height = '16.2rem'
@@ -906,7 +1061,7 @@ function recomendacionesLogica() {
             <p class="no-select">Contratamos a Llacay Arquitectos para desarrollar el proyecto de nuestra casa. Quedamos plenamente satisfechos con el proceso y resultado. Lo recomendamos fuertemente a nuestros amigos...</p>
             <span class="no-select"><b>Marcelo Queijo</b></span>
             <div class="reco-texts__line"></div>
-            </div>`, display1 = true, display3 = false, display2 = false]
+            </div>`, display1 = true, display2 = false, display3 = false, display4 = false, display5 = false, display6 = false, display7 = false, display8 = false, display9 = false, display11 = false, display10 = false]
         }
     }
 
@@ -918,22 +1073,20 @@ function recomendacionesLogica() {
 
         if (display2) return
         else {
-            $('.bottom-lines__dashed_3').removeClass('fade-in')
-            $('.bottom-lines__dashed_1').removeClass('fade-in')
+            dashRemoveFade()
             $('.bottom-lines__dashed_2').addClass('fade-in')
             if (window.mobileCheck()) {
-                el.style.height = '30.5rem'
+                el.style.height = '28rem'
                 } 
             else {
-                el.style.height = '21.875rem'
+                el.style.height = '18.5rem'
                 }
         return [el2.innerHTML = `<div class="reco-texts__1">
-            <p class="no-select">Este pequeño presente tiene como objetivo agradecerles todo lo que hicieron (y aún siguen haciendo) por nuestro proyecto.</p>
-            <p class="no-select">Sinceramente desde la primera reunión y hasta ahora sentimos que todo lo que hicimos asociado a la casa ha sido espectacular, hemos “vivido” el proyecto de la forma en que los soñamos como un verdadero proyecto de vida. Y en ese sentimiento tienen mucho que ver ustedes y la forma en que trabajan.</p>
-            <p class="no-select">De nuevo, Muchas gracias!!!</p>
-            <span class="no-select"><b>Juan José Sobrino</b></span>
+            <p class="no-select">“Estas palabras tienen como objetivo agradecerles todo lo que hicieron (y aún siguen haciendo) por nuestro proyecto.</p>
+            <p class="no-select">Sinceramente desde la primera reunión y hasta ahora sentimos que todo lo que hicimos asociado a la casa ha sido espectacular, hemos “vivido” el proyecto de la forma en que los soñamos como un verdadero proyecto de vida. Y en ese sentimiento tienen mucho que ver ustedes y la forma en que trabajan. Muchas gracias!”</p>
+            <span class="no-select"><b>Juanjo y Gaby Sobrino</b></span>
             <div class="reco-texts__line"></div>
-            </div>`, display2 = true, display3 = false, display1 = false]
+            </div>`, display2 = true, display3 = false, display1 = false, display6 = false, display7 = false, display8 = false, display9 = false, display10 = false, display4 = false, display11 = false, display5 = false]
     }
     }
     
@@ -945,19 +1098,188 @@ function recomendacionesLogica() {
 
         if (display3) return
         else {
-            $('.bottom-lines__dashed_1').removeClass('fade-in')
-            $('.bottom-lines__dashed_2').removeClass('fade-in')
+            dashRemoveFade()
             $('.bottom-lines__dashed_3').addClass('fade-in')
+            if (window.mobileCheck()) {
+                el.style.height = '12.5rem'
+              } 
+            else {
+                el.style.height = '9.5rem'
+            }
+        return [el2.innerHTML = `<p class="no-select">"Excelente arquitecto: Profesional riguroso y dedicado. Siempre en la búsqueda de la mejor solución y el detalle más simple y estudiado.”</p>
+            <span class="no-select"><b>Leonardo Tózzola</b></span><div class="reco-texts__line"></div>`, display6 = false, display9 = false, display8 = false, display3 = true, display10 = false, display1 = false, display7 = false, display2 = false, display4 = false, display11 = false, display5 = false]
+        }
+    }
+
+    function comentario_4() {
+        if (!window.location.pathname.includes("recomendaciones")) {
+            clearTimeout(myTimer)
+            return
+        }
+
+        if (display4) return
+        else {
+            dashRemoveFade()
+            $('.bottom-lines__dashed_4').addClass('fade-in')
             if (window.mobileCheck()) {
                 el.style.height = '17.5rem'
               } 
             else {
                 el.style.height = '12.75rem'
             }
-        return [el2.innerHTML = `<p class="no-select">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ea aperiam, nisi necessitatibus, non, possimus molestiae nihil rerum iure quaerat sed ipsam quam ad sit harum atque iusto. Dolores, consectetur!</p>
-            <span class="no-select"><b>Ipsum Dolor</b></span><div class="reco-texts__line"></div>`, display3 = true, display1 = false, display2 = false]
+        return [el2.innerHTML = `<p class="no-select">“Construí mi primera casa con Jorge, en la que aún vivo. No sólocumplió con los plazos y los presupuestos acordados, sino quedel plano estrictamente laboral y profesional pasamos a unplano de amistad que continúa el día de hoy.”</p>
+            <span class="no-select"><b>Andrés Geringer</b></span><div class="reco-texts__line"></div>`, display6 = false, display9 = false, display8  = false, display10 = false, display4 = true, display7 = false, display5 = false, display3 = false, display1 = false, display11 = false, display2 = false]
         }
     }
+
+    function comentario_5() {
+        if (!window.location.pathname.includes("recomendaciones")) {
+            clearTimeout(myTimer)
+            return
+        }
+
+        if (display5) return
+        else {
+            dashRemoveFade()
+            $('.bottom-lines__dashed_5').addClass('fade-in')
+            if (window.mobileCheck()) {
+                el.style.height = '20.5rem'
+              } 
+            else {
+                el.style.height = '16.5rem'
+            }
+        return [el2.innerHTML = `<p class="no-select">“Ante todo Jorge es un amigo. Y fue con el con quien construimos nuestra primer casa en el año 1998 y no dudamos en volver a elegirlo para nuestra actual casa en el año 2006. Diseño, profesionalismo, honestidad y largos años de experiencia, nos permiten recomendar a Jorge Llacay como de los mejores en su área.”</p>
+            <span class="no-select"><b>Mariana Fabello</b></span><div class="reco-texts__line"></div>`, display4 = false, display9 = false, display8 = false, display10 = false, display3 = false, display7 = false, display1 = false, display2 = false, display6 = false, display11 = false, display5 = true]
+        }
+    }
+
+    function comentario_6() {
+        if (!window.location.pathname.includes("recomendaciones")) {
+            clearTimeout(myTimer)
+            return
+        }
+
+        if (display6) return
+        else {
+            dashRemoveFade()
+            $('.bottom-lines__dashed_6').addClass('fade-in')
+            if (window.mobileCheck()) {
+                el.style.height = '16rem'
+              } 
+            else {
+                el.style.height = '13rem'
+            }
+        return [el2.innerHTML = `<p class="no-select">“Jorge is a very talented professional who handles a variety of projects with creativity and an eye to meeting client objectives. His unflappable demeanor is invaluable in conquering the inevitable snags and keeping projects on track.”</p>
+            <span class="no-select"><b>Barbara Lanning</b></span><div class="reco-texts__line"></div>`, display4 = false, display9 = false, display3 = false, display1 = false, display10 = false, display2 = false, display5 = false, display7 = false, display8 = false, display11 = false, display6 = true]
+        }
+    }
+
+    function comentario_7() {
+        if (!window.location.pathname.includes("recomendaciones")) {
+            clearTimeout(myTimer)
+            return
+        }
+
+        if (display7) return
+        else {
+            dashRemoveFade()
+            $('.bottom-lines__dashed_7').addClass('fade-in')
+            if (window.mobileCheck()) {
+                el.style.height = '20.5rem'
+              } 
+            else {
+                el.style.height = '14.5rem'
+            }
+        return [el2.innerHTML = `<p class="no-select">“Jorge es un excelente profesional, ingenioso y con experiencia liderando múltiples proyectos y equipo. Es parte de una nueva generación de profesionales con capacidades especiales, dedicado a ofrecer alta calidad de servicio. Es proactivo y con importantes capacidades para hacer lo difícil mas fácil...”</p>
+            <span class="no-select"><b>Germán Caino Sola</b></span><div class="reco-texts__line"></div>`, display4 = false, display9 = false, display3 = false, display1 = false, display2 = false, display5 = false, display6 = false, display10 = false, display8 = false, display11 = false, display7 = true]
+        }
+    }
+
+    function comentario_8() {
+        if (!window.location.pathname.includes("recomendaciones")) {
+            clearTimeout(myTimer)
+            return
+        }
+
+        if (display8) return
+        else {
+            dashRemoveFade()
+            $('.bottom-lines__dashed_8').addClass('fade-in')
+            if (window.mobileCheck()) {
+                el.style.height = '28.5rem'
+              } 
+            else {
+                el.style.height = '20.5rem'
+            }
+        return [el2.innerHTML = `<p class="no-select">“Envío estas líneas para hacerles llegar una forma de felicitación por el trabajo que hicieron en la construcción de nuestra casa en Campo Grande.<br>Desde el diseño simple y práctico, que ha recogido elogios de todas nuestras visitas, hasta el responsable cumplimiento de los plazos de entrega, ha sido una satisfacción para nosotros confirmar que acertamos con Ustedes para elegirlos como constructores. Les deseo mucha suerte y que sigan convocando admiradores entre los clientes...”</p>
+            <span class="no-select"><b>Agustín Colombo</b></span><div class="reco-texts__line"></div>`, display4 = false, display3 = false, display1 = false, display2 = false, display5 = false, display6 = false, display7 = false, display9 = false, display11 = false, display10 = false, display8 = true]
+        }
+    }
+
+    function comentario_9() {
+        if (!window.location.pathname.includes("recomendaciones")) {
+            clearTimeout(myTimer)
+            return
+        }
+
+        if (display9) return
+        else {
+            dashRemoveFade()
+            $('.bottom-lines__dashed_9').addClass('fade-in')
+            if (window.mobileCheck()) {
+                el.style.height = '14.5rem'
+              } 
+            else {
+                el.style.height = '11.5rem'
+            }
+        return [el2.innerHTML = `<p class="no-select">“Les deseo un muy feliz año a todos Ustedes y familia. También les agradezco la dedicación que pusieron en la obra y el trato cordial que siempre me brindaron en este proceso.”</p>
+            <span class="no-select"><b>Abel Dozo Moreno</b></span><div class="reco-texts__line"></div>`, display1 = false, display2 = false, display3 = false, display4 = false, display5 = false, display6 = false, display7 = false, display8 = false, display11 = false, display9 = true, display10 = false]
+        }
+    }
+
+    function comentario_10() {
+        if (!window.location.pathname.includes("recomendaciones")) {
+            clearTimeout(myTimer)
+            return
+        }
+
+        if (display10) return
+        else {
+            dashRemoveFade()
+            $('.bottom-lines__dashed_10').addClass('fade-in')
+            if (window.mobileCheck()) {
+                el.style.height = '25.5rem'
+              } 
+            else {
+                el.style.height = '17.3rem'
+            }
+        return [el2.innerHTML = `<p class="no-select">“Jorge es un excelente, creativo y talentoso profesional, orientado a los detalles y siempre dispuesto a superar loas expectativas de los clientes. Mantiene los proyectos en tiempo completando correctamente los objetivos y llevando el proyecto en forma eficiente. Es verdaderamente alguien en quien uno puede depositar la confianza cuando se necesita construir lo que se llama hogar. Lo recomiendo fuertemente...”</p>
+            <span class="no-select"><b>Julio Daina</b></span><div class="reco-texts__line"></div>`, display1 = false, display2 = false, display3 = false, display4 = false, display5 = false, display6 = false, display7 = false, display8 = false, display9 = false, display11 = false, display10 = true]
+        }
+    }
+
+    function comentario_11() {
+        if (!window.location.pathname.includes("recomendaciones")) {
+            clearTimeout(myTimer)
+            return
+        }
+
+        if (display11) return
+        else {
+            dashRemoveFade()
+            $('.bottom-lines__dashed_11').addClass('fade-in')
+            if (window.mobileCheck()) {
+                el.style.height = '23.5rem'
+              } 
+            else {
+                el.style.height = '15.5rem'
+            }
+        return [el2.innerHTML = `<p class="no-select">“Jorge es un excelente profesional de una gran honestidad y calidad humana. Lo conocí a partir del emprendimiento que desarrollaron en San Isidro, complejo Stay Martinez, fui inversor en ese complejo y han finalizado un producto de primer nivel, con exquisitos detalles de buen gusto. Espero muy pronto volver a trabajar con Jorge y acompañarlo en cualquier otro proyecto que encare.”</p>
+            <span class="no-select"><b>José Luis Neve</b></span><div class="reco-texts__line"></div>`, display1 = false, display2 = false, display3 = false, display4 = false, display5 = false, display6 = false, display7 = false, display8 = false, display9 = false, display10 = false, display11 = true]
+        }
+    }
+
+
 
     //  ============================================
     //  Pausar o reanudar comentario actual en hover

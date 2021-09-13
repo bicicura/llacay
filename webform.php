@@ -24,11 +24,11 @@ $mail = new PHPMailer;
 $mail->SMTPDebug=3;
 
 # Aca mas adelante va a tener que traer el Frommail y Fromname de una tabla
-$mail->From='fr4ncolamattina@gmail.com';
-$mail->FromName='Franco La Mattina';
+$mail->From='llacay@gmail.com';
+$mail->FromName='Llacay Sitio Web';
 
-$mail->setFrom('fr4ncolamattina@gmail.com', 'Franco');
-$mail->addAddress('fr4ncolamattina@gmail.com', 'Franco');
+$mail->setFrom('llacay@gmail.com', 'Llacay Arq Sitio Web');
+$mail->addAddress('llacay@gmail.com', 'Jorge');
 $mail->addReplyTo($email, $name);
 
 # Para que nos tome el HTML del text editor
