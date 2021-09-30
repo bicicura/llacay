@@ -295,7 +295,18 @@ function lazyLoading() {
     })
 }
 
+$( "body" ).delegate( ".gallery-cols__container>div>div", "click", function() {
+    console.log($(this).find('img').attr('src') )
 
+    $('#modal-img').removeClass('closed')
+    $('#modal-img img').attr('src', $(this).find('img').attr('src'))
+
+
+})
+$( "body" ).delegate( '#modal-img', "click", function() {
+
+    $('#modal-img').addClass('closed')
+})
 </script>
 
 <script src="assets/js/carousel.js"></script>
