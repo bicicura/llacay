@@ -19,7 +19,7 @@ MENU CONT
     left: 0;
     width: 100%;
     height: 100vh;
-    z-index: 99999999;
+    z-index: 99995;
     cursor: pointer;
     pointer-events: none;
 }
@@ -563,6 +563,7 @@ FIRST LOADER
     left: 25rem;
     transform: translateX(0);
     transition: transform 1s cubic-bezier(0.13, 0.77, 0.33, 1)!important;
+    display: none!important;
 }
 
 @media (max-width: 799px) {
@@ -578,5 +579,50 @@ FIRST LOADER
 
     .dashed + .dashed {
         margin-left: .5rem;
+    }
+}
+
+.footer-container-scroll {
+    position: relative;
+
+}
+
+.movidabanda {
+    position: absolute;
+    left: 0;
+    right: 0;
+    position: absolute;
+    width: 90%;
+    margin: 0 auto;
+
+}
+
+.footer-container-scroll-cont {
+    width: 90vw;
+    /* border: 2px solid red; */
+}
+
+.bottom-lines__scroll-indicator {
+    width: 8rem;
+    height: .2rem;
+    background-color: whitesmoke;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    transform: translateX(0vw);
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@media (max-width: 800px) {
+    .bottom-lines__scroll-indicator {
+        /* top: -2.7vh; */
+        width: 4rem;
+    }
+
+    .movidabanda {
+        position: fixed;
+        bottom: -2.5rem;
+        height: 4rem;
     }
 }

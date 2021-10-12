@@ -234,6 +234,43 @@ function menuRestart() {
 
 
 
+// =====================================================
+// scrollPosition() calcula la altura del body y la 
+// divide por el scroll en Y. Saca la posición de donde 
+// tiene que estar el indicator del scroll que arme
+// =====================================================
+
+function scrollPosition() {
+    var body = document.body,
+    html = document.documentElement;
+    let scrollIndicator = document.querySelector('.bottom-lines__scroll-indicator')
+
+
+    if (window.mobileCheck() && window.location.pathname.includes('galeria')) {
+        let scrollIndicator = document.querySelector('.bottom-lines__scroll-indicator')
+        var bodyWidth = Math.max( body.scrollWidth, body.offsetWidth, 
+            html.clientWidth, html.scrollWidth, html.offsetWidth );
+        var scrollX = document.body.scrollLeft
+        let scrollIndicatorPositionGaleria = (scrollX * 100) / bodyWidth
+        scrollIndicator.style.left = `${scrollIndicatorPositionGaleria}%`
+        console.log(scrollIndicatorPositionGaleria)
+    } else {
+        var bodyHeight = Math.max( body.scrollHeight, body.offsetHeight, 
+        html.clientHeight, html.scrollHeight, html.offsetHeight );
+        let scrollPositionY = window.scrollY
+        let scrollIndicatorPosition = (scrollPositionY * 100) / bodyHeight 
+        scrollIndicator.style.left = `${scrollIndicatorPosition}%`
+    }
+    // console.log(scrollIndicatorPosition)
+}
+
+/* PARA SACAR EL EVENT LISTENER
+ if (window.location.pathname.includes("inspiracion")) {
+    window.removeEventListener('scroll', scrollPosition)
+} */
+
+
+
 // ============================================
 // rowAppear() aparecen las imagenes de GALERIA
 // el window.scrollTo(0, 0) es para q en mobile siempre q se entre a galeria vaya al principio tmb 
@@ -674,6 +711,10 @@ function recosBottomBarFade() {
 
     function checkGaleria() {
     if (window.location.pathname.includes("galeria")) {
+        window.removeEventListener('scroll', scrollPosition)
+        window.addEventListener('scroll', scrollPosition)
+        document.body.removeEventListener('scroll', scrollPosition)
+        document.body.addEventListener('scroll', scrollPosition)
         if (window.mobileCheck()) {
             removeDisplayNoneTransitions()
             bgMaskTransition.classList.add('display-none')
@@ -714,8 +755,12 @@ function checkInspiracion() {
     if (!window.location.pathname.includes("inspiracion")) return 
 
     else {
+        window.removeEventListener('scroll', scrollPosition)
+        window.addEventListener('scroll', scrollPosition)
         if (window.mobileCheck()) {
             removeDisplayNoneTransitions()
+            // Para que el indicador del scroll se reinicie y marque bien
+            document.body.scrollTo(0, 0)
         }
         bottomBarFade()
         removeDisappear()
@@ -778,6 +823,8 @@ function checkContacto() {
     else {
         if (window.mobileCheck()) {
             removeDisplayNoneTransitions()
+            // Para que el indicador del scroll se reinicie y marque bien 
+            document.body.scrollTo(0, 0)
         }
         bottomBarFade()
         $(".bottom-lines__dashed-recos").addClass('fade-out')
@@ -825,6 +872,8 @@ function inputsDinamicos() {
 function recomendacionesLogica() {
 
     if (!window.location.pathname.includes('recomendaciones')) return
+
+    window.removeEventListener('scroll', scrollPosition)
 
     let el = document.querySelector('.reco-texts__container')
     let el2 = document.querySelector('.reco-texts__1')
@@ -926,47 +975,47 @@ function recomendacionesLogica() {
     //  =============================================
 
     function runScrollUp() {
-        if (display1 && scrollUp) {
+        if (display1 || display1 && scrollUp) {
             comentario_11() 
             return
         }
-        else if (display11 && scrollUp) {
+        else if (display11 ||  display11 && scrollUp) {
             comentario_10() 
             return
         }
-        else if (display10 && scrollUp) {
+        else if (display10 ||display10 && scrollUp) {
             comentario_9() 
             return
         }
-        else if (display9 && scrollUp) {
+        else if (display9 || display9 && scrollUp) {
             comentario_8() 
             return
         }
-        else if (display8 && scrollUp) {
+        else if (display8 || display8 && scrollUp) {
             comentario_7() 
             return
         }
-        else if (display7 && scrollUp) {
+        else if (display7 || display7 && scrollUp) {
             comentario_6() 
             return
         }
-        else if (display6 && scrollUp) {
+        else if (display6 || display6 && scrollUp) {
             comentario_5() 
             return
         }
-        else if (display5 && scrollUp) {
+        else if (display5 || display5 && scrollUp) {
             comentario_4()
             return
         }
-        else if (display4 && scrollUp) {
+        else if (display4 || display4 && scrollUp) {
             comentario_3()
             return
         }
-        else if (display3 && scrollUp) {
+        else if (display3 ||  display3 && scrollUp) {
             comentario_2()
             return
         }
-        else if (display2 && scrollUp) {
+        else if (display2 || display2 && scrollUp) {
             comentario_1()
             return
         }
@@ -995,16 +1044,28 @@ function recomendacionesLogica() {
                 }
                 lasScrollTop = scrollTop
             })
-    }  
+    }
 
+    let prevClick = document.querySelector(".reco-clickPrev")
+    let nextClick = document.querySelector(".reco-clickNext")
 
+    prevClick.addEventListener('click', ()=> {
+        counter = 0;
+        runScrollUp()
+    })
+    nextClick.addEventListener('click', ()=> {
+        runScrollDown()
+        counter = 0;
+    })
+
+    counter = 0
 
     //  ==============================================================
     //  changer() hace que cuando la var counter llegue a 14, 
     //  se cambia el comentario al llamar a la funcion runScrollDown()
     //  ==============================================================
     
-    var counter = 0;
+    
     
     function changer(){
         if (!window.location.pathname.includes('recomendaciones')) {
@@ -1390,6 +1451,10 @@ function recomendacionesLogica() {
                 return;
          }
          manejoViewportMobile()
+         setTimeout(()=> {
+            //  Esta es para que corte la inercia del scroll y que se pueda cambiar rapido de comentario sin tener que esperar a que el evento termine para volver a cambiar el comet
+            window.scrollTo(0, 600)
+         }, 200)
         })
     }
 

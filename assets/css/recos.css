@@ -155,3 +155,23 @@ ANIMS
                                         supported by Chrome, Edge, Opera and Firefox */
       }
 }
+
+.reco-texts-click-cont {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+
+}
+
+.reco-texts-click-cont > * {    
+    flex-basis: 100%;
+}
+
+.bottom-lines__scroll-indicator {
+display: none;
+}
+
